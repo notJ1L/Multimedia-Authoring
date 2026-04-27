@@ -23,6 +23,17 @@ document.querySelectorAll('.main-nav a').forEach((anchor) => {
     });
 });
 
+document.querySelectorAll('.topic-button[data-url]').forEach((button) => {
+    button.addEventListener('click', () => {
+        const url = button.getAttribute('data-url');
+        if (!url) {
+            return;
+        }
+
+        window.location.href = url;
+    });
+});
+
 const revealItems = document.querySelectorAll('.reveal');
 
 if (prefersReducedMotion) {
