@@ -229,6 +229,48 @@ main {
     color: var(--text-soft);
 }
 
+.topic-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(143, 243, 255, 0.45);
+    background: rgba(143, 243, 255, 0.08);
+    transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+}
+
+.topic-link:hover,
+.topic-link:focus-visible {
+    border-color: rgba(143, 243, 255, 0.75);
+    color: var(--highlight);
+    background: rgba(143, 243, 255, 0.14);
+}
+
+.video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(166, 241, 255, 0.25);
+    background: rgba(2, 16, 34, 0.84);
+    margin-top: 12px;
+}
+
+.video-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.video-meta {
+    color: var(--text-soft);
+    margin: 8px 0 0;
+}
+
 .split {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;

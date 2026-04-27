@@ -2,8 +2,13 @@
 
 document.querySelectorAll('.main-nav a').forEach((anchor) => {
     anchor.addEventListener('click', (event) => {
+        const href = anchor.getAttribute('href') || '';
+        if (!href.startsWith('#')) {
+            return;
+        }
+
         event.preventDefault();
-        const targetId = anchor.getAttribute('href')?.replace('#', '');
+        const targetId = href.slice(1);
         if (!targetId) {
             return;
         }
