@@ -323,6 +323,107 @@ main {
     font-size: 1.08rem;
 }
 
+
+.age-calculator {
+    display: grid;
+    gap: 18px;
+}
+
+.age-calculator > p {
+    margin: 0;
+    color: var(--text-soft);
+}
+
+.age-calculator-form {
+    display: grid;
+    gap: 10px;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid rgba(166, 241, 255, 0.24);
+    background: rgba(2, 16, 34, 0.84);
+}
+
+.age-calculator-form label {
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.age-calculator-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: center;
+}
+
+.age-calculator-controls input {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(143, 243, 255, 0.35);
+    background: rgba(1, 12, 26, 0.9);
+    color: var(--text-main);
+    font: inherit;
+}
+
+.age-calculator-controls input:focus-visible {
+    outline: 2px solid rgba(143, 243, 255, 0.7);
+    outline-offset: 2px;
+}
+
+.age-calculator-controls button {
+    padding: 12px 18px;
+    border: 1px solid rgba(143, 243, 255, 0.45);
+    border-radius: 999px;
+    background: rgba(143, 243, 255, 0.1);
+    color: var(--text-main);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+}
+
+.age-calculator-controls button:hover,
+.age-calculator-controls button:focus-visible {
+    border-color: rgba(143, 243, 255, 0.75);
+    color: var(--highlight);
+    background: rgba(143, 243, 255, 0.16);
+}
+
+.age-calculator-help {
+    margin: 0;
+    color: var(--text-soft);
+    font-size: 0.95rem;
+}
+
+.age-calculator-results {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.age-result-card {
+    padding: 16px;
+    border-radius: 14px;
+    background: rgba(2, 16, 34, 0.84);
+    border: 1px solid rgba(166, 241, 255, 0.24);
+}
+
+.age-result-card h3 {
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+    text-align: left;
+}
+
+.age-result-card p {
+    margin: 0;
+    color: var(--text-soft);
+}
+
+.age-result-card strong {
+    color: var(--highlight);
+    font-size: 1.2rem;
+}
 .project-note p {
     margin: 0;
     color: var(--text-soft);
@@ -503,6 +604,10 @@ footer {
     .body-grid {
         grid-template-columns: 1fr;
     }
+
+    .age-calculator-results {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 640px) {
@@ -517,6 +622,14 @@ footer {
 
     .main-nav ul {
         gap: 6px;
+    }
+
+    .age-calculator-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .age-calculator-results {
+        grid-template-columns: 1fr;
     }
 
     .main-nav a {

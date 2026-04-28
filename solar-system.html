@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blender 3D Solar System</title>
-    <link rel="stylesheet" href="styles.css?v=20260427b">
+    <link rel="stylesheet" href="styles.css?v=20260428a">
 </head>
 <body>
     <div class="bg-scene" aria-hidden="true">
@@ -67,6 +67,22 @@
                         <p>High-resolution planetary textures sourced from Solar System Scope's texture library</p>
                     </div>
                 </div>
+            </section>
+
+            <section class="panel reveal visible age-calculator" id="age-calculator">
+                <h2>Planet Age Calculator</h2>
+                <p>Enter an age in Earth years to see the equivalent age on each planet.</p>
+
+                <form class="age-calculator-form" data-age-calculator-form>
+                    <label for="earth-years">Earth years</label>
+                    <div class="age-calculator-controls">
+                        <input id="earth-years" name="earth-years" type="number" min="0" step="0.1" value="1" inputmode="decimal" aria-describedby="age-calculator-help">
+                        <button type="submit">Calculate</button>
+                    </div>
+                    <p id="age-calculator-help" class="age-calculator-help">Use decimals if needed, for example 12.5.</p>
+                </form>
+
+                <div class="age-calculator-results" data-age-calculator-results aria-live="polite"></div>
             </section>
 
             <section class="panel reveal visible">
@@ -242,6 +258,6 @@
         </footer>
     </div>
 
-    <script src="script.js?v=20260427b"></script>
+    <script src="script.js?v=20260428a"></script>
 </body>
 </html>

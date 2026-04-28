@@ -72,3 +72,77 @@ if (!prefersReducedMotion && orbs.length > 0) {
         });
     });
 }
+
+const ageCalculatorForm = document.querySelector('[data-age-calculator-form]');
+const ageCalculatorResults = document.querySelector('[data-age-calculator-results]');
+
+if (ageCalculatorForm && ageCalculatorResults) {
+    const earthYearsInput = ageCalculatorForm.elements.namedItem('earth-years');
+    const planetYears = [
+        { name: 'Mercury', orbitalPeriod: 0.2408467 },
+        { name: 'Venus', orbitalPeriod: 0.61519726 },
+        { name: 'Earth', orbitalPeriod: 1 },
+        { name: 'Mars', orbitalPeriod: 1.8808158 },
+        { name: 'Jupiter', orbitalPeriod: 11.862615 },
+        { name: 'Saturn', orbitalPeriod: 29.447498 },
+        { name: 'Uranus', orbitalPeriod: 84.016846 },
+        { name: 'Neptune', orbitalPeriod: 164.79132 },
+        { name: 'Pluto', orbitalPeriod: 248 }
+    ];
+
+    const formatAge = (value) => {
+        if (!Number.isFinite(value)) {
+            return '0';
+        }
+
+        if (value >= 1000) {
+            return value.toFixed(0);
+        }
+
+        if (value >= 100) {
+            return value.toFixed(1);
+        }
+
+        if (value >= 1) {
+            return value.toFixed(2);
+        }
+
+        if (value >= 0.01) {
+            return value.toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
+        }
+
+        return '<0.01';
+    };
+
+    const renderAges = () => {
+        if (!(earthYearsInput instanceof HTMLInputElement)) {
+            return;
+        }
+
+        const earthYears = Number(earthYearsInput.value);
+        const normalizedEarthYears = Number.isFinite(earthYears) && earthYears >= 0 ? earthYears : 0;
+
+        ageCalculatorResults.innerHTML = planetYears
+            .map((planet) => {
+                const planetAge = normalizedEarthYears / planet.orbitalPeriod;
+
+                return `
+                    <article class="age-result-card">
+                        <h3>${planet.name}</h3>
+                        <p><strong>${formatAge(planetAge)}</strong> ${planet.name} years</p>
+                    </article>
+                `;
+            })
+            .join('');
+    };
+
+    ageCalculatorForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        renderAges();
+    });
+
+    if (earthYearsInput instanceof HTMLInputElement) {
+        earthYearsInput.addEventListener('input', renderAges);
+    }
+    renderAges();
+}
