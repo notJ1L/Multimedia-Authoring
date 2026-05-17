@@ -796,3 +796,14 @@ footer {
     line-height: 1.4;
     white-space: pre;
 }
+
+/* Rotoscope disclaimer styling */
+.video-disclaimer {
+    margin-top: 8px;
+    color: var(--text-soft);
+    font-size: 0.95rem;
+}
+.video-disclaimer small {
+    font-style: italic;
+    color: var(--text-soft);
+}
