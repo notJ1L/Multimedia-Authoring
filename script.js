@@ -1,4 +1,6 @@
-﻿const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+﻿/* jshint esversion: 6 */
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.querySelectorAll('.main-nav a').forEach((anchor) => {
     anchor.addEventListener('click', (event) => {
