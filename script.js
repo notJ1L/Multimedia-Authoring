@@ -26,13 +26,21 @@ document.querySelectorAll('.main-nav a').forEach((anchor) => {
 });
 
 document.querySelectorAll('.topic-button[data-url]').forEach((button) => {
-    button.addEventListener('click', () => {
+    const navigate = () => {
         const url = button.getAttribute('data-url');
         if (!url) {
             return;
         }
 
         window.location.href = url;
+    };
+
+    button.addEventListener('click', navigate);
+    button.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            navigate();
+        }
     });
 });
 
