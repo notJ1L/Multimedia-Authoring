@@ -6,6 +6,296 @@
     <title>3D Solar System - Multimedia &amp; Authoring</title>
     <meta name="description" content="A Blender-based 3D solar system project featuring orbital mechanics, planetary textures, and animated data displays.">
     <link rel="stylesheet" href="styles.css?v=20260706e">
+    <style>
+        /* Specific Styles Inspired by Orbital Dynamics Dashboard */
+        .dash-planet-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .dash-planet-title {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            margin: 0;
+            line-height: 1;
+            font-family: var(--font-display);
+        }
+        .dash-planet-subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+        .dash-data-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 10px 0;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+        .dash-data-row:last-child {
+            border-bottom: none;
+        }
+        .dash-label { color: var(--text-muted); }
+        .dash-value { font-weight: 500; color: #fff; }
+        
+        .dash-bar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0 4px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+        .dash-bar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 65%;
+            justify-content: flex-end;
+        }
+        .dash-bar-track {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            max-width: 150px;
+        }
+        .dash-bar-fill {
+            height: 100%;
+            background: #8B7FF5; /* Violet from original palette */
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(139, 127, 245, 0.4);
+        }
+
+        /* Calculator Top Bar Inspired by Screenshot */
+        .calc-dashboard-bar {
+            background: rgba(10, 10, 16, 0.8);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+        }
+        .calc-dash-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .calc-form-inline {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .calc-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .calc-input-dark {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            width: 80px;
+            text-align: center;
+        }
+        .calc-btn-amber {
+            background: #8B7FF5;
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .calc-btn-amber:hover {
+            background: #9d94ff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(139, 127, 245, 0.3);
+        }
+
+        /* Result card redesigned for premium look */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .age-result-card {
+            background: linear-gradient(135deg, rgba(20,20,30,0.6) 0%, rgba(10,10,15,0.8) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 4px solid #8B7FF5; /* Violet accent line */
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            margin: 0;
+        }
+        .age-result-card:hover {
+            transform: translateY(-5px);
+            border-left-color: #a89eff;
+            box-shadow: 0 20px 40px rgba(139, 127, 245, 0.15);
+            background: linear-gradient(135deg, rgba(25,25,40,0.8) 0%, rgba(15,15,25,0.95) 100%);
+        }
+        /* Subtle ring decoration inside card */
+        .age-result-card::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 120px;
+            height: 120px;
+            border: 2px solid rgba(139, 127, 245, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            transition: transform 0.5s ease;
+        }
+        .age-result-card:hover::after {
+            transform: scale(1.1);
+            border-color: rgba(139, 127, 245, 0.2);
+        }
+        .age-result-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            margin: 0 0 0.8rem 0;
+            color: #fff;
+            letter-spacing: 0.02em;
+        }
+        .age-result-value {
+            font-family: var(--font-mono);
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .age-result-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+        .age-result-unit {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .bento-visual-dark {
+            background: #000 !important;
+            padding: 0; /* Ensures edge-to-edge video */
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        @media (max-width: 768px) {
+            .calc-dashboard-bar { flex-direction: column; gap: 1rem; align-items: stretch; text-align: center; }
+            .calc-form-inline { justify-content: center; }
+            .data-grid { grid-template-columns: 1fr; }
+        }
+    
+        .bento-content-wrap {
+            padding: 2.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .planet-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: auto; /* push to bottom */
+        }
+        .btn-action {
+            flex: 1;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-muted);
+            padding: 0.75rem 0.5rem;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .btn-action:hover {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            border-color: rgba(255,255,255,0.2);
+        }
+        .btn-blenderkit {
+            color: #8B7FF5;
+            background: rgba(139, 127, 245, 0.05);
+            border-color: rgba(139, 127, 245, 0.2);
+        }
+        .btn-blenderkit:hover {
+            background: rgba(139, 127, 245, 0.15);
+            color: #fff;
+            border-color: rgba(139, 127, 245, 0.4);
+        }
+        .btn-action:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: transparent;
+        }
+    
+    
+        .clickable-planet-card {
+            cursor: pointer;
+        }
+        .clickable-planet-card .bento-content-wrap {
+            padding: 1.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+        .clickable-planet-card .dash-planet-header {
+            margin-bottom: 0;
+            text-align: center;
+        }
+        .clickable-planet-card .dash-planet-subtitle {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+        .clickable-planet-card:hover {
+            border-color: rgba(139, 127, 245, 0.4);
+            box-shadow: 0 30px 60px rgba(139, 127, 245, 0.2);
+        }
+        
+        /* Modal specific styling for payload */
+        #info-modal-body .planet-data {
+            background: rgba(255,255,255,0.02);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 0;
+        }
+        #info-modal-body .planet-actions {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+        }
+    
+    </style>
 </head>
 <body class="page--solar">
     <div class="bg-mesh" aria-hidden="true"></div>
@@ -28,7 +318,7 @@
 
     <main>
         <!-- HERO -->
-        <section class="project-hero reveal visible">
+        <section class="project-hero reveal visible" style="padding-bottom: 2rem;">
             <div class="container">
                 <span class="hero-badge">Project 01</span>
                 <h2 class="hero-title">Blender 3D <span class="text-gradient-accent">Solar System</span></h2>
@@ -36,197 +326,436 @@
                     A procedurally generated solar system focused on realism, motion, and clear presentation of planetary mechanics.
                 </p>
                 
-                <div class="video-container">
-                    <video class="project-video" controls preload="metadata" style="width: 100%; height: 100%; object-fit: contain; background: #000;">
+                <div class="video-container" style="max-width: 1200px; position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5);">
+                    <video id="hero-solar-video" class="project-video" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; background: #000; display: block;">
                         <source src="Celestial Bodies/Caisip - Solar System.mp4" type="video/mp4">
                         Your browser does not support this video format.
                     </video>
-                </div>
-            </div>
-        </section>
-
-        <!-- TELEMETRY / STATS -->
-        <section class="section reveal">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Orbital Telemetry</h2>
-                </div>
-                <div class="data-grid">
-                    <div class="data-card">
-                        <h4>Mercury</h4>
-                        <p>Radius: 0.39 AU &nbsp;|&nbsp; Period: 88d</p>
-                    </div>
-                    <div class="data-card">
-                        <h4>Venus</h4>
-                        <p>Radius: 0.72 AU &nbsp;|&nbsp; Period: 225d</p>
-                    </div>
-                    <div class="data-card">
-                        <h4>Earth</h4>
-                        <p>Radius: 1.00 AU &nbsp;|&nbsp; Period: 365d</p>
-                    </div>
-                    <div class="data-card">
-                        <h4>Mars</h4>
-                        <p>Radius: 1.52 AU &nbsp;|&nbsp; Period: 687d</p>
-                    </div>
-                    <div class="data-card">
-                        <h4>Jupiter</h4>
-                        <p>Radius: 5.20 AU &nbsp;|&nbsp; Period: 11.9yr</p>
-                    </div>
-                    <div class="data-card">
-                        <h4>Saturn</h4>
-                        <p>Radius: 9.58 AU &nbsp;|&nbsp; Period: 29.5yr</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AGE CALCULATOR -->
-        <section class="section reveal" id="age-calculator">
-            <div class="container">
-                <div class="calc-box">
-                    <h2>Planetary Age Calculator</h2>
-                    <p style="color: var(--text-muted); margin-top: 1rem;">Enter an age in Earth years to see the equivalent age on each planet.</p>
                     
-                    <form class="age-calculator-form" data-age-calculator-form>
-                        <div class="calc-input-group">
-                            <input id="earth-years" name="earth-years" type="number" min="0" step="0.1" value="1" placeholder="Earth Years">
-                            <button type="submit" class="btn btn-glow" style="padding: 1rem 2rem; border-radius: 12px; font-family: var(--font-body);">Calculate</button>
-                        </div>
+                    <button id="btn-hero-fullscreen" class="btn btn-glass" style="position: absolute; bottom: 20px; right: 20px; z-index: 10; display: flex; align-items: center; gap: 8px; padding: 0.8rem 1.5rem; border-radius: 12px; background: rgba(10,10,15,0.7); backdrop-filter: blur(10px); color: #fff; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: all 0.3s ease;">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                        Watch Full Screen
+                    </button>
+                </div>
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const heroVid = document.getElementById('hero-solar-video');
+                        const fsBtn = document.getElementById('btn-hero-fullscreen');
+                        
+                        if(heroVid && fsBtn) {
+                            fsBtn.addEventListener('click', () => {
+                                if (heroVid.requestFullscreen) {
+                                    heroVid.requestFullscreen();
+                                } else if (heroVid.webkitRequestFullscreen) {
+                                    heroVid.webkitRequestFullscreen();
+                                }
+                            });
+                            
+                            // Add hover effect via JS/CSS inline
+                            fsBtn.addEventListener('mouseenter', () => fsBtn.style.background = 'rgba(139, 127, 245, 0.4)');
+                            fsBtn.addEventListener('mouseleave', () => fsBtn.style.background = 'rgba(10,10,15,0.7)');
+                            
+                            const handleFS = () => {
+                                const isFullscreen = document.fullscreenElement === heroVid || document.webkitFullscreenElement === heroVid;
+                                if (isFullscreen) {
+                                    heroVid.controls = true;
+                                    heroVid.muted = false; // Unmute in full screen
+                                } else {
+                                    heroVid.controls = false;
+                                    heroVid.muted = true;  // Mute again when exiting
+                                }
+                            };
+                            
+                            document.addEventListener('fullscreenchange', handleFS);
+                            document.addEventListener('webkitfullscreenchange', handleFS);
+                        }
+                    });
+                </script>
+            </div>
+        </section>
+
+        <!-- CELESTIAL BODIES (MODELS & DASHBOARD DATA) -->
+        <section class="section">
+            <div class="container">
+                
+                <!-- Calculator Top Bar (Inspired by Screenshot) -->
+                <div class="calc-dashboard-bar reveal" id="age-calculator">
+                    <div class="calc-dash-title" style="display:flex; align-items:center; gap: 10px;">
+                        <span style="background: #8B7FF5; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; font-family: var(--font-mono);">CB</span>
+                        Orbital Dynamics Calculator
+                    </div>
+                    
+                    <form class="age-calculator-form calc-form-inline" data-age-calculator-form>
+                        <label class="calc-label" for="earth-years">Your Age</label>
+                        <input id="earth-years" class="calc-input-dark" name="earth-years" type="number" min="0" step="0.1" value="20" placeholder="--">
+                        <button type="submit" class="calc-btn-amber">Calculate &rarr;</button>
                     </form>
-                    
-                    <div class="age-calculator-results data-grid" data-age-calculator-results aria-live="polite" style="margin-top: 3rem;">
-                        <!-- Results dynamically injected here -->
-                    </div>
                 </div>
-            </div>
-        </section>
+                
+                <div class="age-calculator-results data-grid" data-age-calculator-results aria-live="polite" style="margin-bottom: 4rem;">
+                    <!-- Results dynamically injected here, styling updated in JS if needed, or we just rely on the standard cards -->
+                </div>
 
-        <!-- CELESTIAL BODIES (MODELS) -->
-        <section class="section reveal">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Celestial Models</h2>
+                <div class="section-header reveal">
+                    <h2>Celestial Database</h2>
                 </div>
                 
                 <div class="bento-grid">
                     <!-- Sun -->
-                    <div class="bento-card bento-half">
-                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
-                            <video controls preload="metadata" style="background:#000;">
+                    <div class="bento-card bento-half clickable-planet-card reveal">
+                        <div class="bento-visual bento-visual-dark">
+                            <video autoplay loop muted playsinline>
                                 <source src="Celestial Bodies/Sun Model 0001-0250.mkv" type="video/x-matroska">
                             </video>
                         </div>
-                        <h3>Sun</h3>
-                        <p>The star at the center of the solar system and the main source of light and energy. Age: 4.6 billion years.</p>
-                        <button class="btn btn-glass btn-view-code" data-code="Python Code/SunPython.py" data-title="Sun Python Code" style="width: 100%;">View Generation Code</button>
+                        <div class="bento-content-wrap">
+                        <div class="dash-planet-header">
+                            <h3 class="dash-planet-title">Sun</h3>
+                            <p class="dash-planet-subtitle">G-Type Main Sequence · Our Star</p>
+                        </div>
+                        <div class="planet-details-payload" style="display: none;">
+<div class="planet-data">
+                            <div class="dash-data-row">
+                                <span class="dash-label">Planet age</span>
+                                <span class="dash-value">4.6B yr</span>
+                            </div>
+                            <div class="dash-data-row">
+                                <span class="dash-label">Distance from Galactic Center</span>
+                                <span class="dash-value">26,000 ly</span>
+                            </div>
+                            <div class="dash-data-row"><span class="dash-label">Surface Temperature</span><span class="dash-value">5,500 °C</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Mass vs Earth</span><span class="dash-value">330,000x</span></div>
+                            <div class="dash-bar-container">
+                                <span class="dash-label">Size vs Earth</span>
+                                <div class="dash-bar-wrap">
+                                    <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 100%;"></div></div>
+                                    <span class="dash-value">109x</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="planet-actions">
+                            <button class="btn-action btn-view-code" data-code="Python Code/SunPython.py" data-title="Sun Python Code">View Code</button>
+                            <a href="Python Code/SunPython.py" download="SunPython.py" class="btn-action btn-download-code">Download</a>
+                            <a href="https://www.blenderkit.com/asset-gallery-detail/1031b98f-498f-4f99-8fb4-7a5ac54b5460/" target="_blank" class="btn-action btn-blenderkit">BlenderKit</a>
+                        </div>
+                    </div>
+</div>
                     </div>
 
                     <!-- Mercury -->
-                    <div class="bento-card bento-half">
-                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
-                            <video controls preload="metadata" style="background:#000;">
+                    <div class="bento-card bento-half clickable-planet-card reveal">
+                        <div class="bento-visual bento-visual-dark">
+                            <video autoplay loop muted playsinline>
                                 <source src="Celestial Bodies/Spinning Mercury 0001-0250.mkv" type="video/x-matroska">
                             </video>
                         </div>
-                        <h3>Mercury</h3>
-                        <p>The smallest and fastest planet, with a heavily cratered surface. Orbital period: 88 Earth days.</p>
-                        <button class="btn btn-glass btn-view-code" data-code="Python Code/MercuryPython.py" data-title="Mercury Python Code" style="width: 100%;">View Generation Code</button>
+                        <div class="bento-content-wrap">
+                        <div class="dash-planet-header">
+                            <h3 class="dash-planet-title">Mercury</h3>
+                            <p class="dash-planet-subtitle">Terrestrial Planet · Closest to Sun</p>
+                        </div>
+                        <div class="planet-details-payload" style="display: none;">
+<div class="planet-data">
+                            <div class="dash-data-row"><span class="dash-label">Orbital period</span><span class="dash-value">88 Days</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Distance from Sun</span><span class="dash-value">0.39 AU</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Surface Temp</span><span class="dash-value">-173 to 427 °C</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Moons</span><span class="dash-value">0</span></div>
+                            <div class="dash-bar-container">
+                                <span class="dash-label">Size vs Earth</span>
+                                <div class="dash-bar-wrap">
+                                    <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 38%;"></div></div>
+                                    <span class="dash-value">38%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="planet-actions">
+                            <button class="btn-action btn-view-code" data-code="Python Code/MercuryPython.py" data-title="Mercury Python Code">View Code</button>
+                            <a href="Python Code/MercuryPython.py" download="MercuryPython.py" class="btn-action btn-download-code">Download</a>
+                            <a href="https://www.blenderkit.com/asset-gallery-detail/c890243c-81f6-4584-9a96-40c3ad97b16a/" target="_blank" class="btn-action btn-blenderkit">BlenderKit</a>
+                        </div>
+                    </div>
+</div>
                     </div>
                     
                     <!-- Venus -->
-                    <div class="bento-card bento-half">
-                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
-                            <video controls preload="metadata" style="background:#000;">
+                    <div class="bento-card bento-half clickable-planet-card reveal">
+                        <div class="bento-visual bento-visual-dark">
+                            <video autoplay loop muted playsinline>
                                 <source src="Celestial Bodies/Spinning Venus 0001-0250.mkv" type="video/x-matroska">
                             </video>
                         </div>
-                        <h3>Venus</h3>
-                        <p>A dense, hot world wrapped in thick clouds and intense greenhouse conditions. Orbital period: 225 Earth days.</p>
-                        <button class="btn btn-glass btn-view-code" data-code="Python Code/VenusPython.py" data-title="Venus Python Code" style="width: 100%;">View Generation Code</button>
+                        <div class="bento-content-wrap">
+                        <div class="dash-planet-header">
+                            <h3 class="dash-planet-title">Venus</h3>
+                            <p class="dash-planet-subtitle">Terrestrial Planet · Thick Atmosphere</p>
+                        </div>
+                        <div class="planet-details-payload" style="display: none;">
+<div class="planet-data">
+                            <div class="dash-data-row"><span class="dash-label">Orbital period</span><span class="dash-value">225 Days</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Distance from Sun</span><span class="dash-value">0.72 AU</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Surface Temp</span><span class="dash-value">462 °C</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Day Length</span><span class="dash-value">243 Earth days</span></div>
+                            <div class="dash-bar-container">
+                                <span class="dash-label">Size vs Earth</span>
+                                <div class="dash-bar-wrap">
+                                    <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 95%;"></div></div>
+                                    <span class="dash-value">95%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="planet-actions">
+                            <button class="btn-action btn-view-code" data-code="Python Code/VenusPython.py" data-title="Venus Python Code">View Code</button>
+                            <a href="Python Code/VenusPython.py" download="VenusPython.py" class="btn-action btn-download-code">Download</a>
+                            <a href="https://www.blenderkit.com/asset-gallery-detail/cc767bab-a226-4cdd-acf7-6ae23bd34110/" target="_blank" class="btn-action btn-blenderkit">BlenderKit</a>
+                        </div>
+                    </div>
+</div>
                     </div>
 
                     <!-- Earth -->
-                    <div class="bento-card bento-half">
-                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
-                            <video controls preload="metadata" style="background:#000;">
+                    <div class="bento-card bento-half clickable-planet-card reveal">
+                        <div class="bento-visual bento-visual-dark">
+                            <video autoplay loop muted playsinline>
                                 <source src="Celestial Bodies/0001-0250.mkv" type="video/x-matroska">
                             </video>
                         </div>
-                        <h3>Earth</h3>
-                        <p>The third planet from the Sun and the only known planet to support life. Orbital period: 365.25 Earth days.</p>
-                        <button class="btn btn-glass btn-view-code" data-code="Python Code/EarthPythno.py" data-title="Earth Python Code" style="width: 100%;">View Generation Code</button>
+                        <div class="bento-content-wrap">
+                        <div class="dash-planet-header">
+                            <h3 class="dash-planet-title">Earth</h3>
+                            <p class="dash-planet-subtitle">Terrestrial Planet · Our Home</p>
+                        </div>
+                        <div class="planet-details-payload" style="display: none;">
+<div class="planet-data">
+                            <div class="dash-data-row"><span class="dash-label">Orbital period</span><span class="dash-value">365.25 Days</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Distance from Sun</span><span class="dash-value">1.00 AU</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Surface Temp</span><span class="dash-value">15 °C (Avg)</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Moons</span><span class="dash-value">1</span></div>
+                            <div class="dash-bar-container">
+                                <span class="dash-label">Size vs Earth</span>
+                                <div class="dash-bar-wrap">
+                                    <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 100%;"></div></div>
+                                    <span class="dash-value">100%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="planet-actions">
+                            <button class="btn-action btn-view-code" data-code="Python Code/EarthPythno.py" data-title="Earth Python Code">View Code</button>
+                            <a href="Python Code/EarthPythno.py" download="EarthPythno.py" class="btn-action btn-download-code">Download</a>
+                            <a href="https://www.blenderkit.com/asset-gallery-detail/804a6541-e20d-4a0f-977c-47b8bd17164a/" target="_blank" class="btn-action btn-blenderkit">BlenderKit</a>
+                        </div>
+                    </div>
+</div>
                     </div>
                     
                     <!-- Mars -->
-                    <div class="bento-card bento-half">
-                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
-                            <video controls preload="metadata" style="background:#000;">
+                    <div class="bento-card bento-half clickable-planet-card reveal">
+                        <div class="bento-visual bento-visual-dark">
+                            <video autoplay loop muted playsinline>
                                 <source src="Celestial Bodies/Mars Model 0001-0250.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <h3>Mars</h3>
-                        <p>The red planet, known for dusty plains, giant volcanoes, and polar ice caps. Orbital period: 687 Earth days.</p>
-                        <button class="btn btn-glass btn-view-code" data-code="Python Code/MarsPython.py" data-title="Mars Python Code" style="width: 100%;">View Generation Code</button>
+                        <div class="bento-content-wrap">
+                        <div class="dash-planet-header">
+                            <h3 class="dash-planet-title">Mars</h3>
+                            <p class="dash-planet-subtitle">Terrestrial Planet · The Red Planet</p>
+                        </div>
+                        <div class="planet-details-payload" style="display: none;">
+<div class="planet-data">
+                            <div class="dash-data-row"><span class="dash-label">Orbital period</span><span class="dash-value">687 Days</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Distance from Sun</span><span class="dash-value">1.52 AU</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Surface Temp</span><span class="dash-value">-63 °C (Avg)</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Moons</span><span class="dash-value">2</span></div>
+                            <div class="dash-bar-container">
+                                <span class="dash-label">Size vs Earth</span>
+                                <div class="dash-bar-wrap">
+                                    <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 53%;"></div></div>
+                                    <span class="dash-value">53%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="planet-actions">
+                            <button class="btn-action btn-view-code" data-code="Python Code/MarsPython.py" data-title="Mars Python Code">View Code</button>
+                            <a href="Python Code/MarsPython.py" download="MarsPython.py" class="btn-action btn-download-code">Download</a>
+                            <a href="https://www.blenderkit.com/asset-gallery-detail/896e253d-df64-4d76-9ca0-9990a6e2e2e7/" target="_blank" class="btn-action btn-blenderkit">BlenderKit</a>
+                        </div>
+                    </div>
+</div>
                     </div>
 
                     <!-- Jupiter -->
-                    <div class="bento-card bento-half">
-                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
-                            <video controls preload="metadata" style="background:#000;">
+                    <div class="bento-card bento-half clickable-planet-card reveal">
+                        <div class="bento-visual bento-visual-dark">
+                            <video autoplay loop muted playsinline>
                                 <source src="Celestial Bodies/Jupiter Model 0001-0250.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <h3>Jupiter</h3>
-                        <p>The largest planet, a gas giant with powerful storms and many moons. Orbital period: 11.86 Earth years.</p>
-                        <button class="btn btn-glass btn-view-code" data-code="Python Code/JupiterPython.py" data-title="Jupiter Python Code" style="width: 100%;">View Generation Code</button>
+                        <div class="bento-content-wrap">
+                        <div class="dash-planet-header">
+                            <h3 class="dash-planet-title">Jupiter</h3>
+                            <p class="dash-planet-subtitle">Gas Giant · Largest Planet</p>
+                        </div>
+                        <div class="planet-details-payload" style="display: none;">
+<div class="planet-data">
+                            <div class="dash-data-row"><span class="dash-label">Orbital period</span><span class="dash-value">11.9 Years</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Distance from Sun</span><span class="dash-value">5.20 AU</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Moons</span><span class="dash-value">95</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Mass vs Earth</span><span class="dash-value">318x</span></div>
+                            <div class="dash-bar-container">
+                                <span class="dash-label">Size vs Earth</span>
+                                <div class="dash-bar-wrap">
+                                    <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 100%;"></div></div>
+                                    <span class="dash-value">11x</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="planet-actions">
+                            <button class="btn-action btn-view-code" data-code="Python Code/JupiterPython.py" data-title="Jupiter Python Code">View Code</button>
+                            <a href="Python Code/JupiterPython.py" download="JupiterPython.py" class="btn-action btn-download-code">Download</a>
+                            <a href="https://www.blenderkit.com/asset-gallery-detail/00c8275b-bc60-4db8-82cf-d63c923e2275/" target="_blank" class="btn-action btn-blenderkit">BlenderKit</a>
+                        </div>
+                    </div>
+</div>
                     </div>
 
                     <!-- Saturn -->
-                    <div class="bento-card bento-half">
-                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
-                            <video controls preload="metadata" style="background:#000;">
+                    <div class="bento-card bento-half clickable-planet-card reveal">
+                        <div class="bento-visual bento-visual-dark">
+                            <video autoplay loop muted playsinline>
                                 <source src="Celestial Bodies/Saturn Model 0001-0250.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <h3>Saturn</h3>
-                        <p>Known for its bright rings and wide system of moons. Orbital period: 29.46 Earth years.</p>
-                        <button class="btn btn-glass btn-view-code" data-code="Python Code/SaturnPython.py" data-title="Saturn Python Code" style="width: 100%;">View Generation Code</button>
+                        <div class="bento-content-wrap">
+                        <div class="dash-planet-header">
+                            <h3 class="dash-planet-title">Saturn</h3>
+                            <p class="dash-planet-subtitle">Gas Giant · Ringed Planet</p>
+                        </div>
+                        <div class="planet-details-payload" style="display: none;">
+<div class="planet-data">
+                            <div class="dash-data-row"><span class="dash-label">Orbital period</span><span class="dash-value">29.5 Years</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Distance from Sun</span><span class="dash-value">9.58 AU</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Moons</span><span class="dash-value">146</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Rings</span><span class="dash-value">7 Main Groups</span></div>
+                            <div class="dash-bar-container">
+                                <span class="dash-label">Size vs Earth</span>
+                                <div class="dash-bar-wrap">
+                                    <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 82%;"></div></div>
+                                    <span class="dash-value">9x</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="planet-actions">
+                            <button class="btn-action btn-view-code" data-code="Python Code/SaturnPython.py" data-title="Saturn Python Code">View Code</button>
+                            <a href="Python Code/SaturnPython.py" download="SaturnPython.py" class="btn-action btn-download-code">Download</a>
+                            <a href="https://www.blenderkit.com/asset-gallery-detail/00490308-860e-43bc-8bef-60b1653e55c3/" target="_blank" class="btn-action btn-blenderkit">BlenderKit</a>
+                        </div>
+                    </div>
+</div>
                     </div>
 
                     <!-- Uranus -->
-                    <div class="bento-card bento-half">
-                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
-                            <video controls preload="metadata" style="background:#000;">
+                    <div class="bento-card bento-half clickable-planet-card reveal">
+                        <div class="bento-visual bento-visual-dark">
+                            <video autoplay loop muted playsinline>
                                 <source src="Celestial Bodies/Uranus Model 0001-0250.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <h3>Uranus</h3>
-                        <p>An ice giant with a blue-green color and a tilted rotation axis. Orbital period: 84 Earth years.</p>
-                        <button class="btn btn-glass btn-view-code" data-code="Python Code/UranusPython.py" data-title="Uranus Python Code" style="width: 100%;">View Generation Code</button>
+                        <div class="bento-content-wrap">
+                        <div class="dash-planet-header">
+                            <h3 class="dash-planet-title">Uranus</h3>
+                            <p class="dash-planet-subtitle">Ice Giant · Tilted Axis</p>
+                        </div>
+                        <div class="planet-details-payload" style="display: none;">
+<div class="planet-data">
+                            <div class="dash-data-row"><span class="dash-label">Orbital period</span><span class="dash-value">84 Years</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Distance from Sun</span><span class="dash-value">19.2 AU</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Surface Temp</span><span class="dash-value">-224 °C</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Moons</span><span class="dash-value">28</span></div>
+                            <div class="dash-bar-container">
+                                <span class="dash-label">Size vs Earth</span>
+                                <div class="dash-bar-wrap">
+                                    <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 36%;"></div></div>
+                                    <span class="dash-value">4x</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="planet-actions">
+                            <button class="btn-action btn-view-code" data-code="Python Code/UranusPython.py" data-title="Uranus Python Code">View Code</button>
+                            <a href="Python Code/UranusPython.py" download="UranusPython.py" class="btn-action btn-download-code">Download</a>
+                            <a href="https://www.blenderkit.com/asset-gallery-detail/6da69699-ce0f-4ae5-94a3-7dd796b046f8/" target="_blank" class="btn-action btn-blenderkit">BlenderKit</a>
+                        </div>
+                    </div>
+</div>
                     </div>
 
                     <!-- Neptune -->
-                    <div class="bento-card bento-half">
-                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
-                            <video controls preload="metadata" style="background:#000;">
+                    <div class="bento-card bento-half clickable-planet-card">
+                        <div class="bento-visual bento-visual-dark">
+                            <video autoplay loop muted playsinline>
                                 <source src="Celestial Bodies/Neptune Model 0001-0250.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <h3>Neptune</h3>
-                        <p>A cold blue ice giant with strong winds and storms. Orbital period: 164.8 Earth years.</p>
-                        <button class="btn btn-glass btn-view-code" data-code="Python Code/NeptunePython.py" data-title="Neptune Python Code" style="width: 100%;">View Generation Code</button>
+                        <div class="bento-content-wrap">
+                        <div class="dash-planet-header">
+                            <h3 class="dash-planet-title">Neptune</h3>
+                            <p class="dash-planet-subtitle">Ice Giant · Outermost Planet</p>
+                        </div>
+                        <div class="planet-details-payload" style="display: none;">
+<div class="planet-data">
+                            <div class="dash-data-row"><span class="dash-label">Orbital period</span><span class="dash-value">164.8 Years</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Distance from Sun</span><span class="dash-value">30.1 AU</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Wind Speed</span><span class="dash-value">2,100 km/h</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Moons</span><span class="dash-value">16</span></div>
+                            <div class="dash-bar-container">
+                                <span class="dash-label">Size vs Earth</span>
+                                <div class="dash-bar-wrap">
+                                    <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 35%;"></div></div>
+                                    <span class="dash-value">3.9x</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="planet-actions">
+                            <button class="btn-action btn-view-code" data-code="Python Code/NeptunePython.py" data-title="Neptune Python Code">View Code</button>
+                            <a href="Python Code/NeptunePython.py" download="NeptunePython.py" class="btn-action btn-download-code">Download</a>
+                            <a href="https://www.blenderkit.com/asset-gallery-detail/920fc52a-7251-4dc3-b56c-5ce7a9e65c16/" target="_blank" class="btn-action btn-blenderkit">BlenderKit</a>
+                        </div>
+                    </div>
+</div>
                     </div>
 
                     <!-- Pluto -->
-                    <div class="bento-card bento-half">
-                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
-                            <video controls preload="metadata" style="background:#000;">
+                    <div class="bento-card bento-half clickable-planet-card">
+                        <div class="bento-visual bento-visual-dark">
+                            <video autoplay loop muted playsinline>
                                 <source src="Celestial Bodies/Pluto Model0001-0250.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <h3>Pluto (Dwarf)</h3>
-                        <p>A small icy dwarf planet in the outer solar system. Orbital period: 248 Earth years.</p>
-                        <button class="btn btn-glass btn-view-code" data-code="Python Code/PlutoPython.py" data-title="Pluto Python Code" style="width: 100%;">View Generation Code</button>
+                        <div class="bento-content-wrap">
+                        <div class="dash-planet-header">
+                            <h3 class="dash-planet-title">Pluto</h3>
+                            <p class="dash-planet-subtitle">Dwarf Planet · Kuiper Belt</p>
+                        </div>
+                        <div class="planet-details-payload" style="display: none;">
+<div class="planet-data">
+                            <div class="dash-data-row"><span class="dash-label">Orbital period</span><span class="dash-value">248 Years</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Distance from Sun</span><span class="dash-value">39.5 AU</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Surface Temp</span><span class="dash-value">-225 °C</span></div>
+                            <div class="dash-data-row"><span class="dash-label">Moons</span><span class="dash-value">5</span></div>
+                            <div class="dash-bar-container">
+                                <span class="dash-label">Size vs Earth</span>
+                                <div class="dash-bar-wrap">
+                                    <div class="dash-bar-track"><div class="dash-bar-fill" style="width: 18%;"></div></div>
+                                    <span class="dash-value">18%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="planet-actions">
+                            <button class="btn-action btn-view-code" data-code="Python Code/PlutoPython.py" data-title="Pluto Python Code">View Code</button>
+                            <a href="Python Code/PlutoPython.py" download="PlutoPython.py" class="btn-action btn-download-code">Download</a>
+                            <button disabled class="btn-action">Texture Gen</button>
+                        </div>
+                    </div>
+</div>
                     </div>
                 </div>
             </div>
@@ -237,18 +766,120 @@
         <p>&copy; 2026 Multimedia &amp; Authoring &nbsp;|&nbsp; Premium Design</p>
     </footer>
 
-    <!-- CODE MODAL (from previous JS implementation, styling inline to avoid issues) -->
-    <div id="code-modal" class="modal" aria-hidden="true" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center;">
-        <div class="modal-content" style="background: var(--bg-dark); border: 1px solid var(--card-border); border-radius: 16px; width: 90%; max-width: 1000px; height: 80vh; display: flex; flex-direction: column; overflow: hidden;">
-            <div class="modal-header" style="padding: 1.5rem; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center;">
-                <h3 id="modal-title" style="font-family: var(--font-display); margin: 0;">Python Code</h3>
-                <div style="display: flex; gap: 1rem;">
-                    <button class="modal-download btn-download-code btn btn-glass" type="button" style="padding: 0.5rem 1rem;">Download</button>
-                    <button class="modal-close btn btn-glass" aria-label="Close modal" style="padding: 0.5rem 1rem; color: #ff5555;">Close X</button>
+    
+    <!-- PLANET INFO MODAL -->
+    <div id="planet-info-modal" class="modal" aria-hidden="true">
+        <div class="modal-content" style="max-width: 600px; height: auto; max-height: 90vh;">
+            <div class="modal-header">
+                <div style="display: flex; flex-direction: column;">
+                    <h3 id="info-modal-title" style="margin-bottom: 0.2rem;">Planet</h3>
+                    <p id="info-modal-subtitle" style="color: var(--text-muted); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin: 0;"></p>
+                </div>
+                <div style="flex: 1;"></div>
+                <button class="modal-btn modal-close" id="close-info-modal" aria-label="Close modal">Close</button>
+            </div>
+            <div class="modal-body" id="info-modal-body" style="padding: 2rem; background: var(--bg-dark);">
+                <!-- Modal Video -->
+                <div class="modal-video-wrap" style="position: relative; margin-bottom: 2rem; border-radius: 16px; overflow: hidden; height: 250px; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                    <video id="modal-planet-video" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                        <source id="modal-planet-source" src="" type="video/mp4">
+                    </video>
+                    <button id="btn-modal-fullscreen" class="btn btn-glass" style="position: absolute; bottom: 15px; right: 15px; z-index: 10; display: flex; align-items: center; gap: 8px; padding: 0.5rem 1rem; border-radius: 8px; background: rgba(10,10,15,0.7); backdrop-filter: blur(10px); color: #fff; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: all 0.3s ease;">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                        Full Screen
+                    </button>
                 </div>
             </div>
-            <div class="modal-body" style="padding: 1.5rem; flex: 1; overflow: auto; background: #000;">
-                <pre style="margin: 0;"><code id="modal-code-block" style="font-family: var(--font-mono); color: var(--accent-main);"></code></pre>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentOpenPlanetCard = null;
+            const infoModal = document.getElementById('planet-info-modal');
+            const infoBody = document.getElementById('info-modal-body');
+            const closeBtn = document.getElementById('close-info-modal');
+            const modalVid = document.getElementById('modal-planet-video');
+            const modalSource = document.getElementById('modal-planet-source');
+            const modalFsBtn = document.getElementById('btn-modal-fullscreen');
+
+            if (infoModal && infoBody && closeBtn) {
+                document.querySelectorAll('.clickable-planet-card').forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        // Ignore if clicking on buttons inside payload
+                        if (e.target.closest('.planet-details-payload')) return;
+                        
+                        currentOpenPlanetCard = card;
+                        const title = card.querySelector('.dash-planet-title').textContent;
+                        const subtitle = card.querySelector('.dash-planet-subtitle').textContent;
+                        const payload = card.querySelector('.planet-details-payload');
+                        
+                        document.getElementById('info-modal-title').textContent = title;
+                        document.getElementById('info-modal-subtitle').textContent = subtitle;
+                        
+                        // Handle Video
+                        const cardVideoSource = card.querySelector('video source');
+                        if (cardVideoSource && modalSource && modalVid) {
+                            modalSource.src = cardVideoSource.src;
+                            if(cardVideoSource.type) modalSource.type = cardVideoSource.type;
+                            modalVid.load();
+                        }
+
+                        payload.style.display = 'block';
+                        infoBody.appendChild(payload);
+                        
+                        infoModal.classList.add('show');
+                    });
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    if (currentOpenPlanetCard) {
+                        const payload = infoBody.querySelector('.planet-details-payload');
+                        if (payload) {
+                            payload.style.display = 'none';
+                            currentOpenPlanetCard.querySelector('.bento-content-wrap').appendChild(payload);
+                        }
+                    }
+                    if (modalVid) {
+                        modalVid.pause();
+                        modalSource.src = "";
+                    }
+                    infoModal.classList.remove('show');
+                    currentOpenPlanetCard = null;
+                });
+                
+                if (modalVid && modalFsBtn) {
+                    modalFsBtn.addEventListener('click', () => {
+                        if (modalVid.requestFullscreen) modalVid.requestFullscreen();
+                        else if (modalVid.webkitRequestFullscreen) modalVid.webkitRequestFullscreen();
+                    });
+                    
+                    modalFsBtn.addEventListener('mouseenter', () => modalFsBtn.style.background = 'rgba(139, 127, 245, 0.4)');
+                    modalFsBtn.addEventListener('mouseleave', () => modalFsBtn.style.background = 'rgba(10,10,15,0.7)');
+                    
+                    const handleModalFS = () => {
+                        const isFs = document.fullscreenElement === modalVid || document.webkitFullscreenElement === modalVid;
+                        modalVid.controls = isFs;
+                        modalVid.muted = !isFs;
+                    };
+                    document.addEventListener('fullscreenchange', handleModalFS);
+                    document.addEventListener('webkitfullscreenchange', handleModalFS);
+                }
+            }
+        });
+    </script>
+    <!-- CODE MODAL -->
+    <div id="code-modal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Python Code</h3>
+                <div class="modal-actions">
+                    <button class="modal-btn btn-download-code">Download</button>
+                    <button class="modal-btn modal-close" aria-label="Close modal">Close</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <pre><code id="modal-code-block"></code></pre>
             </div>
         </div>
     </div>
@@ -266,12 +897,7 @@
                 }
             });
             
-            // Modal closing patch
-            document.querySelectorAll('.modal-close').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.getElementById('code-modal').style.display = 'none';
-                });
-            });
+            // Modal closing patch is no longer needed here as script.js handles the 'show' class toggle gracefully.
         }());
     </script>
 </body>

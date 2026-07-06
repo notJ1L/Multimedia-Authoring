@@ -139,7 +139,10 @@ if (ageCalculatorForm && ageCalculatorResults) {
                 return `
                     <article class="age-result-card">
                         <h3>${planet.name}</h3>
-                        <p><strong>${formatAge(planetAge)}</strong> ${planet.name} years</p>
+                        <div class="age-result-value">
+                            <span class="age-result-number">${formatAge(planetAge)}</span>
+                            <span class="age-result-unit">${planet.name} years</span>
+                        </div>
                     </article>
                 `;
             })

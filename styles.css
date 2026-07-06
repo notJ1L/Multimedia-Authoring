@@ -505,6 +505,80 @@ body {
 }
 
 /* =========================================================================
+   PROJECT BENTO GRID (Original Project Pages styling)
+   ========================================================================= */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+}
+
+.bento-card {
+    background: linear-gradient(180deg, rgba(20,20,30,0.6) 0%, rgba(10,10,15,0.8) 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.bento-card:hover {
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(139, 127, 245, 0.15);
+}
+
+.bento-large { grid-column: span 12; display: flex; flex-direction: row; align-items: center; gap: 3rem; }
+.bento-half { grid-column: span 6; }
+
+@media (max-width: 950px) {
+    .bento-large { flex-direction: column; text-align: center; }
+    .bento-half { grid-column: span 12; }
+}
+
+.bento-card h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.bento-card p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.bento-visual {
+    width: 100%;
+    height: 320px;
+    background: #000;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.bento-visual video, .bento-visual img, .bento-visual iframe {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.bento-card:hover .bento-visual video {
+    transform: scale(1.05);
+}
+
+.bento-content { flex: 1; }
+
+/* =========================================================================
    PROJECT POSTER GRID (Replaces Bento for massive visual impact)
    ========================================================================= */
 .section { padding: 6rem 0; }
@@ -764,3 +838,135 @@ footer {
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* =========================================================================
+   MODAL & CODE BLOCK STYLES (Premium Animations & Scrollbars)
+   ========================================================================= */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: rgba(15, 15, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 900px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+    transform: translateY(40px) scale(0.95);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal.show .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.2);
+}
+
+.modal-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin: 0;
+    color: #fff;
+    letter-spacing: 0.05em;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.modal-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.modal-btn:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.modal-close {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.05);
+    border-color: rgba(255, 107, 107, 0.2);
+}
+
+.modal-close:hover {
+    background: rgba(255, 107, 107, 0.15);
+    color: #fff;
+    border-color: rgba(255, 107, 107, 0.4);
+}
+
+.modal-body {
+    padding: 0;
+    flex: 1;
+    overflow-y: auto;
+    background: #0a0a0f;
+}
+
+/* Custom Scrollbar for Modal Body */
+.modal-body::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.modal-body::-webkit-scrollbar-track {
+    background: #0a0a0f;
+}
+.modal-body::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+    border-radius: 5px;
+    border: 2px solid #0a0a0f;
+}
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.modal-body pre {
+    margin: 0;
+    padding: 2rem;
+    min-height: 100%;
+}
+
+.modal-body code {
+    font-family: 'Fira Code', Consolas, monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #a9b1d6; /* sleek grayish-blue */
+}
