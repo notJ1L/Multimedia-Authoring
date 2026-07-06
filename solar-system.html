@@ -318,13 +318,101 @@
 
     <main>
         <!-- HERO -->
-        <section class="project-hero reveal visible" style="padding-bottom: 2rem;">
-            <div class="container">
-                <span class="hero-badge">Project 01</span>
-                <h2 class="hero-title">Blender 3D <span class="text-gradient-accent">Solar System</span></h2>
-                <p class="hero-description">
-                    A procedurally generated solar system focused on realism, motion, and clear presentation of planetary mechanics.
-                </p>
+        <section class="project-hero reveal visible" style="position: relative; overflow: hidden; padding: 6rem 0; text-align: center; background: transparent;">
+            
+            <!-- Animated Ambient Background Orb -->
+            <div style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); width: 80vw; height: 600px; max-width: 1000px; background: radial-gradient(ellipse, rgba(139, 127, 245, 0.15) 0%, rgba(0, 240, 255, 0.05) 40%, transparent 70%); filter: blur(60px); z-index: 0; pointer-events: none; border-radius: 50%; animation: pulseOrb 8s infinite alternate ease-in-out;"></div>
+
+            <style>
+                @keyframes pulseOrb {
+                    0% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.95); }
+                    100% { opacity: 1; transform: translate(-50%, -45%) scale(1.05); }
+                }
+                .premium-title {
+                    font-family: var(--font-display);
+                    font-size: clamp(4rem, 10vw, 8rem);
+                    font-weight: 800;
+                    line-height: 0.95;
+                    letter-spacing: -0.04em;
+                    margin-bottom: 1.5rem;
+                    position: relative;
+                    z-index: 2;
+                }
+                .premium-title-overline {
+                    display: block;
+                    font-family: var(--font-mono);
+                    font-size: clamp(0.9rem, 2vw, 1.2rem);
+                    color: #8B7FF5;
+                    text-transform: uppercase;
+                    letter-spacing: 0.3em;
+                    margin-bottom: 1.5rem;
+                    font-weight: 600;
+                }
+                .premium-title-main {
+                    background: linear-gradient(180deg, #FFFFFF 0%, #A9B1D6 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+                }
+                .premium-desc {
+                    font-size: clamp(1.1rem, 2vw, 1.4rem);
+                    color: #8a94b5;
+                    max-width: 650px;
+                    margin: 0 auto 3.5rem;
+                    line-height: 1.6;
+                    position: relative;
+                    z-index: 2;
+                }
+                .premium-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 8px 16px;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 100px;
+                    font-family: var(--font-mono);
+                    font-size: 0.8rem;
+                    color: #E2E8F0;
+                    letter-spacing: 0.05em;
+                    text-transform: uppercase;
+                    backdrop-filter: blur(12px);
+                    position: relative;
+                    z-index: 2;
+                    margin-bottom: 2rem;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                }
+                .premium-badge-dot {
+                    width: 6px;
+                    height: 6px;
+                    background: #00F0FF;
+                    border-radius: 50%;
+                    box-shadow: 0 0 10px #00F0FF;
+                    animation: blink 2s infinite;
+                }
+                @keyframes blink {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0.4; }
+                }
+            </style>
+
+            <div class="container" style="position: relative; z-index: 2;">
+                
+                <div style="min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem;">
+                    <div class="premium-badge">
+                        <span class="premium-badge-dot"></span>
+                        Project 01: Blender Rendering
+                    </div>
+
+                    <h1 class="premium-title">
+                        <span class="premium-title-overline">Explore the</span>
+                        <span class="premium-title-main">Solar System</span>
+                    </h1>
+                    
+                    <p class="premium-desc">
+                        A procedurally generated 3D solar system focused on uncompromising realism, orbital motion, and the clear presentation of planetary mechanics.
+                    </p>
+                </div>
                 
                 <div class="video-container" style="max-width: 1200px; position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5);">
                     <video id="hero-solar-video" class="project-video" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; background: #000; display: block;">
@@ -332,10 +420,37 @@
                         Your browser does not support this video format.
                     </video>
                     
-                    <button id="btn-hero-fullscreen" class="btn btn-glass" style="position: absolute; bottom: 20px; right: 20px; z-index: 10; display: flex; align-items: center; gap: 8px; padding: 0.8rem 1.5rem; border-radius: 12px; background: rgba(10,10,15,0.7); backdrop-filter: blur(10px); color: #fff; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: all 0.3s ease;">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
-                        Watch Full Screen
-                    </button>
+                    <style>
+                    .hero-vid-btn {
+                        display: flex; align-items: center; gap: 8px; padding: 0.8rem 1.5rem; 
+                        border-radius: 12px; background: rgba(10,10,15,0.7); backdrop-filter: blur(10px); 
+                        color: #fff; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; 
+                        transition: all 0.3s ease; text-decoration: none; font-family: var(--font-sans);
+                    }
+                    .hero-vid-btn:hover {
+                        background: rgba(139, 127, 245, 0.4);
+                        border-color: rgba(139, 127, 245, 0.6);
+                    }
+                    </style>
+
+                    <div style="position: absolute; bottom: 20px; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; padding: 0 20px;">
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <button class="hero-vid-btn btn-view-code" data-code="Python Code/SolarSystem.py" data-title="Master Solar System Generator">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"></path></svg>
+                                View Master Code
+                            </button>
+                            <a href="Python Code/SolarSystem.py" download="SolarSystem.py" class="hero-vid-btn btn-download-code">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path></svg>
+                                Download .py
+                            </a>
+                        </div>
+                        
+                        <button id="btn-hero-fullscreen" class="hero-vid-btn">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                            Watch Full Screen
+                        </button>
+                    </div>
                 </div>
                 
                 <script>
