@@ -3,67 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1 Minute Rotoscope Video</title>
+    <title>1 Minute Rotoscope Video - Multimedia &amp; Authoring</title>
     <meta name="description" content="A one-minute rotoscope animation — frame-by-frame visual storytelling from initial sketch to final render, built over 12 weeks of iterative progress.">
-    <link rel="stylesheet" href="styles.css?v=20260706">
+    <link rel="stylesheet" href="styles.css?v=20260706e">
 </head>
 <body class="page--rotoscope">
-    <div class="bg-scene" aria-hidden="true">
-        <div class="bg-gradient"></div>
-        <div class="bg-orb orb-a"></div>
-        <div class="bg-orb orb-b"></div>
-        <div class="bg-orb orb-c"></div>
-        <div class="bg-grid"></div>
-    </div>
+    <div class="bg-mesh" aria-hidden="true"></div>
 
-    <div class="page-shell">
-        <header class="site-header" id="site-header">
-            <div class="brand-block reveal visible">
-                <div class="brand-top">
-                    <span class="status-dot" aria-hidden="true"></span>
-                    <p class="eyebrow">BSIT-S-2A &nbsp;/&nbsp; SEQUENCE: ROTO</p>
-                </div>
-                <h1>Multimedia &amp; Authoring</h1>
-            </div>
-            <nav class="main-nav" aria-label="Main navigation">
-                <ul>
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#portfolio">Portfolio</a></li>
-                    <li><a href="solar-system.html">Solar System</a></li>
-                    <li><a href="rotoscope.html" aria-current="page">Rotoscope</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
-        </header>
+    <header class="site-header" id="site-header">
+        <div class="brand-block">
+            <span class="eyebrow">BSIT-S-2A</span>
+            <h1>Multimedia &amp; Authoring</h1>
+        </div>
+        <nav class="main-nav" aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="solar-system.html">Solar System</a></li>
+                <li><a href="rotoscope.html" class="active">Rotoscope</a></li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <main>
-            <section class="panel hero reveal visible">
-                <p class="hero-badge">Final Project</p>
-                <h2>1 Minute Rotoscope Video</h2>
-                <p>
+    <main>
+        <!-- HERO -->
+        <section class="project-hero reveal visible">
+            <div class="container">
+                <span class="hero-badge">Final Project</span>
+                <h2 class="hero-title">1 Minute <span class="text-gradient-accent">Rotoscope</span></h2>
+                <p class="hero-description">
                     The completed one-minute rotoscope animation — frame-by-frame visual storytelling from initial sketch to final render.
                 </p>
-
-                <!-- Filmstrip motif — the orchestrated animation moment for this page -->
-                <div class="filmstrip-wrap" aria-hidden="true">
-                    <div class="filmstrip-header">
-                        <span class="filmstrip-label">ROTOSCOPE PROJECT &nbsp;&#x2F;&#x2F;&nbsp; FRAME SEQUENCE</span>
-                        <span class="filmstrip-timecode" id="roto-timecode">00:00:00</span>
-                    </div>
-                    <div class="filmstrip-track">
-                        <div class="filmstrip-holes" id="filmstrip-holes">
-                            <!-- Frame units injected by JS below -->
-                        </div>
-                    </div>
-                    <div class="filmstrip-footer">
-                        <span class="filmstrip-stat">FPS: 24</span>
-                        <span class="filmstrip-stat">FORMAT: ROTO / RGB</span>
-                        <span class="filmstrip-stat">DURATION: 01:00</span>
-                        <span class="filmstrip-stat">STATUS: RENDERED</span>
-                    </div>
-                </div>
-
-                <div class="video-wrap video-wrap--hero" role="region" aria-label="Final rotoscope project video player">
+                
+                <div class="video-container">
                     <iframe
                         src="https://www.youtube.com/embed/aim7OZGXRA0"
                         title="Final Rotoscope Project"
@@ -72,260 +45,169 @@
                         allowfullscreen>
                     </iframe>
                 </div>
-                <p class="video-meta">Original link: <a href="https://youtu.be/aim7OZGXRA0" target="_blank" rel="noopener noreferrer">https://youtu.be/aim7OZGXRA0</a></p>
-            </section>
+            </div>
+        </section>
 
-            <section class="panel reveal visible">
-                <span class="mono-label">// WEEKLY SEQUENCE LOG</span>
-                <h2>Weekly Progress Videos</h2>
-                <div class="topic-grid">
-                    <article class="topic">
-                        <h3>Week 1 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 1 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/EfqAoH_43hk"
-                                title="Week 1 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/EfqAoH_43hk" target="_blank" rel="noopener noreferrer">https://youtu.be/EfqAoH_43hk</a></p>
-                    </article>
+        <!-- FILMSTRIP DECORATION -->
+        <div class="filmstrip" style="max-width: 1200px; margin: 0 auto; border-radius: 12px; border: 1px solid var(--card-border); opacity: 0.8;" aria-hidden="true">
+            <div class="film-track">
+                <!-- Generating many frames for the scroll effect -->
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:00</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:05</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:10</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:15</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:20</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:25</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:30</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:35</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:40</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:45</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:50</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+                <div class="film-frame"><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div><div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent-main); text-align: center;">00:55</div><div class="film-holes"><div class="film-hole"></div><div class="film-hole"></div></div></div>
+            </div>
+        </div>
 
-                    <article class="topic">
-                        <h3>Week 2 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 2 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/OD4FL_uq_FA"
-                                title="Week 2 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/OD4FL_uq_FA" target="_blank" rel="noopener noreferrer">https://youtu.be/OD4FL_uq_FA</a></p>
-                    </article>
-
-                    <article class="topic">
-                        <h3>Week 3 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 3 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/DRMsewjpDaY"
-                                title="Week 3 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/DRMsewjpDaY" target="_blank" rel="noopener noreferrer">https://youtu.be/DRMsewjpDaY</a></p>
-                    </article>
-
-                    <article class="topic">
-                        <h3>Week 4 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 4 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/kLwMNqjHNYk"
-                                title="Week 4 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/kLwMNqjHNYk" target="_blank" rel="noopener noreferrer">https://youtu.be/kLwMNqjHNYk</a></p>
-                    </article>
-
-                    <article class="topic">
-                        <h3>Week 5 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 5 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/ZycMoLAoKcY"
-                                title="Week 5 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/ZycMoLAoKcY" target="_blank" rel="noopener noreferrer">https://youtu.be/ZycMoLAoKcY</a></p>
-                    </article>
-
-                    <article class="topic">
-                        <h3>Week 6 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 6 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/jf2SFVJIHqU"
-                                title="Week 6 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/jf2SFVJIHqU" target="_blank" rel="noopener noreferrer">https://youtu.be/jf2SFVJIHqU</a></p>
-                    </article>
-
-                    <article class="topic">
-                        <h3>Week 7 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 7 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/LQRQtikJlPY"
-                                title="Week 7 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/LQRQtikJlPY" target="_blank" rel="noopener noreferrer">https://youtu.be/LQRQtikJlPY</a></p>
-                    </article>
-
-                    <article class="topic">
-                        <h3>Week 8 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 8 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/SaSuLOjkFkU"
-                                title="Week 8 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/SaSuLOjkFkU" target="_blank" rel="noopener noreferrer">https://youtu.be/SaSuLOjkFkU</a></p>
-                    </article>
-
-                    <article class="topic">
-                        <h3>Week 9 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 9 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/3L-9ahPX3CE"
-                                title="Week 9 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/3L-9ahPX3CE" target="_blank" rel="noopener noreferrer">https://youtu.be/3L-9ahPX3CE</a></p>
-                    </article>
-
-                    <article class="topic">
-                        <h3>Week 10 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 10 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/6Y5AvA8jMi4"
-                                title="Week 10 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/6Y5AvA8jMi4" target="_blank" rel="noopener noreferrer">https://youtu.be/6Y5AvA8jMi4</a></p>
-                    </article>
-
-                    <article class="topic">
-                        <h3>Week 11 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 11 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/tBhCfK-1z54"
-                                title="Week 11 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/tBhCfK-1z54" target="_blank" rel="noopener noreferrer">https://youtu.be/tBhCfK-1z54</a></p>
-                    </article>
-
-                    <article class="topic">
-                        <h3>Week 12 Progress</h3>
-                        <div class="video-wrap" role="region" aria-label="Week 12 progress video player">
-                            <iframe
-                                src="https://www.youtube.com/embed/2-gPhAbMOsk"
-                                title="Week 12 Progress"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        <p class="video-meta">Link: <a href="https://youtu.be/2-gPhAbMOsk" target="_blank" rel="noopener noreferrer">https://youtu.be/2-gPhAbMOsk</a></p>
-                    </article>
+        <!-- WEEKLY LOGS (BENTO GRID) -->
+        <section class="section reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Weekly Sequence Log</h2>
                 </div>
-            </section>
-
-            <section class="panel reveal visible">
-                <span class="mono-label">// RAW SOURCE FOOTAGE</span>
-                <h2>1 Minute Raw Clip</h2>
-                <article class="topic topic--wide">
-                    <div class="video-wrap" role="region" aria-label="1 minute raw clip video player">
-                        <iframe
-                            src="https://www.youtube.com/embed/X1duOu6agwA"
-                            title="1 Minute Raw Clip"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            allowfullscreen>
-                        </iframe>
+                
+                <div class="bento-grid">
+                    <!-- Iterating over the weeks -->
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/EfqAoH_43hk" title="Week 1 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.01</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Initial Sketches</h3>
                     </div>
-                    <p class="video-meta">Link: <a href="https://youtu.be/X1duOu6agwA" target="_blank" rel="noopener noreferrer">https://youtu.be/X1duOu6agwA</a></p>
-                    <p class="video-disclaimer"><small><strong>Source attribution:</strong> The raw clip is the property of the YouTube channel "The Official Rocky Balboa" and is used here for educational and illustrative purposes only. Original video: <a href="https://www.youtube.com/watch?v=TNeIwjhjJrc&t=879s" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=TNeIwjhjJrc&amp;t=879s</a></small></p>
-                </article>
-            </section>
-        </main>
 
-        <footer>
-            <p>&copy; 2026 Multimedia &amp; Authoring Website</p>
-        </footer>
-    </div>
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/OD4FL_uq_FA" title="Week 2 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.02</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Keyframes Base</h3>
+                    </div>
 
-    <script src="script.js?v=20260706"></script>
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/DRMsewjpDaY" title="Week 3 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.03</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">In-betweens</h3>
+                    </div>
+
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/kLwMNqjHNYk" title="Week 4 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.04</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Line Art Pass</h3>
+                    </div>
+
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/ZycMoLAoKcY" title="Week 5 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.05</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Motion Check</h3>
+                    </div>
+
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/jf2SFVJIHqU" title="Week 6 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.06</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Color Blocking</h3>
+                    </div>
+
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/LQRQtikJlPY" title="Week 7 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.07</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Shading Pass</h3>
+                    </div>
+
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/SaSuLOjkFkU" title="Week 8 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.08</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Backgrounds</h3>
+                    </div>
+
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/3L-9ahPX3CE" title="Week 9 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.09</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Compositing</h3>
+                    </div>
+
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/6Y5AvA8jMi4" title="Week 10 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.10</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Effects Pass</h3>
+                    </div>
+
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/tBhCfK-1z54" title="Week 11 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.11</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Final Timing</h3>
+                    </div>
+
+                    <div class="bento-card" style="grid-column: span 4; padding: 1.5rem;">
+                        <div class="bento-visual" style="height: 180px; margin-bottom: 1rem; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/2-gPhAbMOsk" title="Week 12 Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">WK.12</h4>
+                        <h3 style="font-size: 1.2rem; margin: 0;">Audio &amp; Export</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RAW FOOTAGE -->
+        <section class="section reveal">
+            <div class="container">
+                <div class="bento-card bento-large" style="margin-top: 2rem;">
+                    <div class="bento-content">
+                        <h3>Source Material</h3>
+                        <p>The raw 1-minute clip used as reference footage for the rotoscope animation. Studying the original motion was critical to capturing the dynamic movement.</p>
+                        <p style="font-size: 0.8rem; margin-top: 2rem; color: var(--text-muted);"><em>Source attribution: The raw clip is the property of the YouTube channel "The Official Rocky Balboa" and is used here for educational and illustrative purposes only.</em></p>
+                    </div>
+                    <div class="bento-visual" style="height: 350px;">
+                        <iframe src="https://www.youtube.com/embed/X1duOu6agwA" title="1 Minute Raw Clip" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Multimedia &amp; Authoring &nbsp;|&nbsp; Premium Design</p>
+    </footer>
+
+    <script src="script.js?v=20260706e"></script>
     <script>
-        /* ── Rotoscope page: filmstrip + timecode ─────────────── */
-        (function () {
-            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            /* Build filmstrip frame units */
-            var strip = document.getElementById('filmstrip-holes');
-            if (strip) {
-                var totalUnits = 48; /* doubled so CSS scroll loop is seamless */
-                var html = '';
-                for (var i = 0; i < totalUnits; i++) {
-                    var num = String((i % 24) + 1).padStart(2, '0');
-                    html +=
-                        '<div class="filmstrip-frame-unit">' +
-                            '<div class="sprocket"></div>' +
-                            '<span class="frame-number">' + num + '</span>' +
-                            '<div class="sprocket"></div>' +
-                        '</div>';
-                }
-                strip.innerHTML = html;
-
-                if (prefersReduced) {
-                    strip.style.animation = 'none';
-                }
-            }
-
-            /* Timecode counter — increments every second */
-            var display = document.getElementById('roto-timecode');
-            if (!display || prefersReduced) return;
-
-            var elapsed = 0;
-            function pad(n) { return String(n).padStart(2, '0'); }
-            function tick() {
-                elapsed++;
-                var h = Math.floor(elapsed / 3600);
-                var m = Math.floor((elapsed % 3600) / 60);
-                var s = elapsed % 60;
-                display.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
-            }
-            setInterval(tick, 1000);
-        }());
-
-        /* ── Sticky header scroll class ─────────────────────── */
         (function () {
             var header = document.getElementById('site-header');
             if (!header) return;
-            var sentinel = document.createElement('div');
-            sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;pointer-events:none;';
-            document.body.prepend(sentinel);
-            new IntersectionObserver(function (entries) {
-                entries.forEach(function (e) { header.classList.toggle('scrolled', !e.isIntersecting); });
-            }, { threshold: 0, rootMargin: '-60px 0px 0px 0px' }).observe(sentinel);
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
         }());
     </script>
 </body>

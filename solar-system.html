@@ -3,365 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blender 3D Solar System</title>
-    <meta name="description" content="A Blender-based 3D solar system project featuring orbital mechanics, planetary textures, and animated data displays — with a planet age calculator.">
-    <link rel="stylesheet" href="styles.css?v=20260706">
+    <title>3D Solar System - Multimedia &amp; Authoring</title>
+    <meta name="description" content="A Blender-based 3D solar system project featuring orbital mechanics, planetary textures, and animated data displays.">
+    <link rel="stylesheet" href="styles.css?v=20260706e">
 </head>
 <body class="page--solar">
-    <div class="bg-scene" aria-hidden="true">
-        <div class="bg-gradient"></div>
-        <div class="bg-orb orb-a"></div>
-        <div class="bg-orb orb-b"></div>
-        <div class="bg-orb orb-c"></div>
-        <div class="bg-grid"></div>
-    </div>
+    <div class="bg-mesh" aria-hidden="true"></div>
 
-    <div class="page-shell">
-        <header class="site-header" id="site-header">
-            <div class="brand-block reveal visible">
-                <div class="brand-top">
-                    <span class="status-dot" aria-hidden="true"></span>
-                    <p class="eyebrow">BSIT-S-2A &nbsp;/&nbsp; SECTOR: SOLAR</p>
-                </div>
-                <h1>Multimedia &amp; Authoring</h1>
-            </div>
-            <nav class="main-nav" aria-label="Main navigation">
-                <ul>
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#portfolio">Portfolio</a></li>
-                    <li><a href="solar-system.html" aria-current="page">Solar System</a></li>
-                    <li><a href="rotoscope.html">Rotoscope</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
-        </header>
+    <header class="site-header" id="site-header">
+        <div class="brand-block">
+            <span class="eyebrow">BSIT-S-2A</span>
+            <h1>Multimedia &amp; Authoring</h1>
+        </div>
+        <nav class="main-nav" aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="solar-system.html" class="active">Solar System</a></li>
+                <li><a href="rotoscope.html">Rotoscope</a></li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <main>
-            <section class="panel hero reveal visible">
-                <span class="mono-label">// PROJECT-01 &nbsp;&mdash;&nbsp; BLENDER 3D</span>
-                <h2>Blender 3D Solar System Rendering</h2>
-                <p>
-                    A Blender-based solar system project focused on motion, realism, and clear planet presentation.
+    <main>
+        <!-- HERO -->
+        <section class="project-hero reveal visible">
+            <div class="container">
+                <span class="hero-badge">Project 01</span>
+                <h2 class="hero-title">Blender 3D <span class="text-gradient-accent">Solar System</span></h2>
+                <p class="hero-description">
+                    A procedurally generated solar system focused on realism, motion, and clear presentation of planetary mechanics.
                 </p>
-
-                <!-- Animated orbit diagram focal visual -->
-                <div class="orbit-diagram-wrap" aria-hidden="true">
-                    <div class="orbit-diagram">
-                        <div class="od-ring od-ring--5"><div class="od-planet"></div></div>
-                        <div class="od-ring od-ring--4"><div class="od-planet"></div></div>
-                        <div class="od-ring od-ring--3"><div class="od-planet"></div></div>
-                        <div class="od-ring od-ring--2"><div class="od-planet"></div></div>
-                        <div class="od-ring od-ring--1"><div class="od-planet"></div></div>
-                        <div class="od-sun"></div>
-                    </div>
-                    <div class="orbit-telemetry">
-                        <div class="telemetry-row">
-                            <span class="telemetry-label">BODY &nbsp;/&nbsp; ORB-R &nbsp;/&nbsp; PERIOD</span>
-                        </div>
-                        <div class="telemetry-row">
-                            <span class="telemetry-label">Mercury</span>
-                            <span class="telemetry-value">0.39 AU &nbsp; 88d</span>
-                        </div>
-                        <div class="telemetry-row">
-                            <span class="telemetry-label">Venus</span>
-                            <span class="telemetry-value">0.72 AU &nbsp; 225d</span>
-                        </div>
-                        <div class="telemetry-row">
-                            <span class="telemetry-label">Earth</span>
-                            <span class="telemetry-value">1.00 AU &nbsp; 365d</span>
-                        </div>
-                        <div class="telemetry-row">
-                            <span class="telemetry-label">Mars</span>
-                            <span class="telemetry-value">1.52 AU &nbsp; 687d</span>
-                        </div>
-                        <div class="telemetry-row">
-                            <span class="telemetry-label">Jupiter</span>
-                            <span class="telemetry-value">5.20 AU &nbsp; 11.9yr</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="video-wrap video-wrap--hero" role="region" aria-label="Complete 3D solar system Blender project video">
-                    <video class="project-video" controls preload="metadata">
+                
+                <div class="video-container">
+                    <video class="project-video" controls preload="metadata" style="width: 100%; height: 100%; object-fit: contain; background: #000;">
                         <source src="Celestial Bodies/Caisip - Solar System.mp4" type="video/mp4">
                         Your browser does not support this video format.
                     </video>
                 </div>
-                <p class="video-meta">Full render: <strong>Caisip — Solar System</strong></p>
+            </div>
+        </section>
 
-                <div class="project-notes">
-                    <div class="project-note">
-                        <h3>Tools Used</h3>
-                        <p>Blender 3.3 (for 3D modeling and animation)</p>
-                        <p>Python Scripting (for procedural generation and automation)</p>
-                    </div>
-
-                    <div class="project-note">
-                        <h3>Render Information</h3>
-                    </div>
-
-                    <div class="project-note">
-                        <h3>Key Features</h3>
-                        <p>Procedurally generated solar system with almost relative sizes</p>
-                        <p>Realistic orbital mechanics with almost relative speeds</p>
-                        <p>Dynamic camera movements zooming in/out between planets</p>
-                        <p>Detailed planetary textures and atmospheric effects</p>
-                        <p>Animated informational displays for each planet</p>
-                    </div>
-
-                    <div class="project-note">
-                        <h3>Texture Materials</h3>
-                        <p>High-resolution planetary textures sourced from Solar System Scope's texture library</p>
-                    </div>
+        <!-- TELEMETRY / STATS -->
+        <section class="section reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Orbital Telemetry</h2>
                 </div>
-            </section>
-
-            <section class="panel reveal visible age-calculator" id="age-calculator">
-                <span class="mono-label">// CALCULATOR &nbsp;&mdash;&nbsp; PLANETARY AGE</span>
-                <h2>Planet Age Calculator</h2>
-                <p>Enter an age in Earth years to see the equivalent age on each planet.</p>
-
-                <form class="age-calculator-form" data-age-calculator-form>
-                    <label for="earth-years">Earth years</label>
-                    <div class="age-calculator-controls">
-                        <input id="earth-years" name="earth-years" type="number" min="0" step="0.1" value="1" inputmode="decimal" aria-describedby="age-calculator-help">
-                        <button type="submit">Calculate</button>
+                <div class="data-grid">
+                    <div class="data-card">
+                        <h4>Mercury</h4>
+                        <p>Radius: 0.39 AU &nbsp;|&nbsp; Period: 88d</p>
                     </div>
-                    <p id="age-calculator-help" class="age-calculator-help">Use decimals if needed, for example 12.5.</p>
-                </form>
-
-                <div class="age-calculator-results" data-age-calculator-results aria-live="polite"></div>
-            </section>
-
-            <section class="panel reveal visible">
-                <span class="mono-label">// CELESTIAL BODIES &nbsp;&mdash;&nbsp; 3D MODELS</span>
-                <h2>Celestial Bodies</h2>
-                <div class="body-grid planet-grid">
-                    <article class="body-card">
-                        <h3>Sun</h3>
-                        <video class="body-video" controls preload="metadata">
-                            <source src="Celestial Bodies/Sun Model 0001-0250.mkv" type="video/x-matroska">
-                            Your browser does not support this video format. If needed, convert the file to MP4 or WebM for broader playback support.
-                        </video>
-                        <ul class="body-facts">
-                            <li><strong>Brief Description:</strong> The Sun is the star at the center of the solar system and the main source of light and energy.</li>
-                            <li><strong>Age:</strong> About 4.6 billion years</li>
-                            <li><strong>Revolution:</strong> N/A</li>
-                            <li><strong>Orbital Period:</strong> N/A</li>
-                            <li><strong>Distance from the Sun:</strong> 0 km</li>
-                        </ul>
-                        <div class="code-actions">
-                            <button class="btn-view-code" data-code="Python Code/SunPython.py" data-title="Sun Python Code">View Code</button>
-                            <a class="btn-download-code" href="Python Code/SunPython.py" download="SunPython.py">Download</a>
-                        </div>
-                    </article>
-
-                    <article class="body-card">
-                        <h3>Mercury</h3>
-                        <video class="body-video" controls preload="metadata">
-                            <source src="Celestial Bodies/Spinning Mercury 0001-0250.mkv" type="video/x-matroska">
-                            Your browser does not support this video format. If needed, convert the file to MP4 or WebM for broader playback support.
-                        </video>
-                        <ul class="body-facts">
-                            <li><strong>Brief Description:</strong> Mercury is the smallest and fastest planet, with a heavily cratered surface.</li>
-                            <li><strong>Age:</strong> About 4.5 billion years</li>
-                            <li><strong>Revolution:</strong> 88 Earth days</li>
-                            <li><strong>Orbital Period:</strong> 88 Earth days</li>
-                            <li><strong>Distance from the Sun:</strong> About 57.9 million km</li>
-                        </ul>
-                        <div class="code-actions">
-                            <button class="btn-view-code" data-code="Python Code/MercuryPython.py" data-title="Mercury Python Code">View Code</button>
-                            <a class="btn-download-code" href="Python Code/MercuryPython.py" download="MercuryPython.py">Download</a>
-                        </div>
-                    </article>
-
-                    <article class="body-card">
-                        <h3>Venus</h3>
-                        <video class="body-video" controls preload="metadata">
-                            <source src="Celestial Bodies/Spinning Venus 0001-0250.mkv" type="video/x-matroska">
-                            Your browser does not support this video format. If needed, convert the file to MP4 or WebM for broader playback support.
-                        </video>
-                        <ul class="body-facts">
-                            <li><strong>Brief Description:</strong> Venus is a dense, hot world wrapped in thick clouds and intense greenhouse conditions.</li>
-                            <li><strong>Age:</strong> About 4.5 billion years</li>
-                            <li><strong>Revolution:</strong> 225 Earth days</li>
-                            <li><strong>Orbital Period:</strong> 225 Earth days</li>
-                            <li><strong>Distance from the Sun:</strong> About 108.2 million km</li>
-                        </ul>
-                        <div class="code-actions">
-                            <button class="btn-view-code" data-code="Python Code/VenusPython.py" data-title="Venus Python Code">View Code</button>
-                            <a class="btn-download-code" href="Python Code/VenusPython.py" download="VenusPython.py">Download</a>
-                        </div>
-                    </article>
-
-                    <article class="body-card">
-                        <h3>Earth</h3>
-                        <video class="body-video" controls preload="metadata">
-                            <source src="Celestial Bodies/0001-0250.mkv" type="video/x-matroska">
-                            Your browser does not support this video format. If needed, convert the file to MP4 or WebM for broader playback support.
-                        </video>
-                        <ul class="body-facts">
-                            <li><strong>Brief Description:</strong> Earth is the third planet from the Sun and the only known planet to support life.</li>
-                            <li><strong>Age:</strong> About 4.54 billion years</li>
-                            <li><strong>Revolution:</strong> 365.25 days</li>
-                            <li><strong>Orbital Period:</strong> 365.25 days</li>
-                            <li><strong>Distance from the Sun:</strong> About 149.6 million km</li>
-                        </ul>
-                        <div class="code-actions">
-                            <button class="btn-view-code" data-code="Python Code/EarthPythno.py" data-title="Earth Python Code">View Code</button>
-                            <a class="btn-download-code" href="Python Code/EarthPythno.py" download="EarthPythno.py">Download</a>
-                        </div>
-                    </article>
-
-                    <article class="body-card">
-                        <h3>Mars</h3>
-                        <video class="body-video" controls preload="metadata">
-                            <source src="Celestial Bodies/Mars Model 0001-0250.mp4" type="video/mp4">
-                            Your browser does not support this video format. If needed, convert the file to MP4 or WebM for broader playback support.
-                        </video>
-                        <ul class="body-facts">
-                            <li><strong>Brief Description:</strong> Mars is the red planet, known for dusty plains, giant volcanoes, and polar ice caps.</li>
-                            <li><strong>Age:</strong> About 4.5 billion years</li>
-                            <li><strong>Revolution:</strong> 687 Earth days</li>
-                            <li><strong>Orbital Period:</strong> 687 Earth days</li>
-                            <li><strong>Distance from the Sun:</strong> About 227.9 million km</li>
-                        </ul>
-                        <div class="code-actions">
-                            <button class="btn-view-code" data-code="Python Code/MarsPython.py" data-title="Mars Python Code">View Code</button>
-                            <a class="btn-download-code" href="Python Code/MarsPython.py" download="MarsPython.py">Download</a>
-                        </div>
-                    </article>
-
-                    <article class="body-card">
-                        <h3>Jupiter</h3>
-                        <video class="body-video" controls preload="metadata">
-                            <source src="Celestial Bodies/Jupiter Model 0001-0250.mp4" type="video/mp4">
-                            Your browser does not support this video format. If needed, convert the file to MP4 or WebM for broader playback support.
-                        </video>
-                        <ul class="body-facts">
-                            <li><strong>Brief Description:</strong> Jupiter is the largest planet, a gas giant with powerful storms and many moons.</li>
-                            <li><strong>Age:</strong> About 4.5 billion years</li>
-                            <li><strong>Revolution:</strong> 11.86 Earth years</li>
-                            <li><strong>Orbital Period:</strong> 11.86 Earth years</li>
-                            <li><strong>Distance from the Sun:</strong> About 778.5 million km</li>
-                        </ul>
-                        <div class="code-actions">
-                            <button class="btn-view-code" data-code="Python Code/JupiterPython.py" data-title="Jupiter Python Code">View Code</button>
-                            <a class="btn-download-code" href="Python Code/JupiterPython.py" download="JupiterPython.py">Download</a>
-                        </div>
-                    </article>
-
-                    <article class="body-card">
-                        <h3>Saturn</h3>
-                        <video class="body-video" controls preload="metadata">
-                            <source src="Celestial Bodies/Saturn Model 0001-0250.mp4" type="video/mp4">
-                            Your browser does not support this video format. If needed, convert the file to MP4 or WebM for broader playback support.
-                        </video>
-                        <ul class="body-facts">
-                            <li><strong>Brief Description:</strong> Saturn is known for its bright rings and wide system of moons.</li>
-                            <li><strong>Age:</strong> About 4.5 billion years</li>
-                            <li><strong>Revolution:</strong> 29.46 Earth years</li>
-                            <li><strong>Orbital Period:</strong> 29.46 Earth years</li>
-                            <li><strong>Distance from the Sun:</strong> About 1.43 billion km</li>
-                        </ul>
-                        <div class="code-actions">
-                            <button class="btn-view-code" data-code="Python Code/SaturnPython.py" data-title="Saturn Python Code">View Code</button>
-                            <a class="btn-download-code" href="Python Code/SaturnPython.py" download="SaturnPython.py">Download</a>
-                        </div>
-                    </article>
-
-                    <article class="body-card">
-                        <h3>Uranus</h3>
-                        <video class="body-video" controls preload="metadata">
-                            <source src="Celestial Bodies/Uranus Model 0001-0250.mp4" type="video/mp4">
-                            Your browser does not support this video format. If needed, convert the file to MP4 or WebM for broader playback support.
-                        </video>
-                        <ul class="body-facts">
-                            <li><strong>Brief Description:</strong> Uranus is an ice giant with a blue-green color and a tilted rotation axis.</li>
-                            <li><strong>Age:</strong> About 4.5 billion years</li>
-                            <li><strong>Revolution:</strong> 84 Earth years</li>
-                            <li><strong>Orbital Period:</strong> 84 Earth years</li>
-                            <li><strong>Distance from the Sun:</strong> About 2.87 billion km</li>
-                        </ul>
-                        <div class="code-actions">
-                            <button class="btn-view-code" data-code="Python Code/UranusPython.py" data-title="Uranus Python Code">View Code</button>
-                            <a class="btn-download-code" href="Python Code/UranusPython.py" download="UranusPython.py">Download</a>
-                        </div>
-                    </article>
-
-                    <article class="body-card">
-                        <h3>Neptune</h3>
-                        <video class="body-video" controls preload="metadata">
-                            <source src="Celestial Bodies/Neptune Model 0001-0250.mp4" type="video/mp4">
-                            Your browser does not support this video format. If needed, convert the file to MP4 or WebM for broader playback support.
-                        </video>
-                        <ul class="body-facts">
-                            <li><strong>Brief Description:</strong> Neptune is a cold blue ice giant with strong winds and storms.</li>
-                            <li><strong>Age:</strong> About 4.5 billion years</li>
-                            <li><strong>Revolution:</strong> 164.8 Earth years</li>
-                            <li><strong>Orbital Period:</strong> 164.8 Earth years</li>
-                            <li><strong>Distance from the Sun:</strong> About 4.50 billion km</li>
-                        </ul>
-                        <div class="code-actions">
-                            <button class="btn-view-code" data-code="Python Code/NeptunePython.py" data-title="Neptune Python Code">View Code</button>
-                            <a class="btn-download-code" href="Python Code/NeptunePython.py" download="NeptunePython.py">Download</a>
-                        </div>
-                    </article>
-
-                    <article class="body-card">
-                        <h3>Pluto (Dwarf Planet)</h3>
-                        <video class="body-video" controls preload="metadata">
-                            <source src="Celestial Bodies/Pluto Model0001-0250.mp4" type="video/mp4">
-                            Your browser does not support this video format. If needed, convert the file to MP4 or WebM for broader playback support.
-                        </video>
-                        <ul class="body-facts">
-                            <li><strong>Brief Description:</strong> Pluto is a small icy dwarf planet in the outer solar system.</li>
-                            <li><strong>Age:</strong> About 4.5 billion years</li>
-                            <li><strong>Revolution:</strong> 248 Earth years</li>
-                            <li><strong>Orbital Period:</strong> 248 Earth years</li>
-                            <li><strong>Distance from the Sun:</strong> About 5.91 billion km</li>
-                        </ul>
-                        <div class="code-actions">
-                            <button class="btn-view-code" data-code="Python Code/PlutoPython.py" data-title="Pluto Python Code">View Code</button>
-                            <a class="btn-download-code" href="Python Code/PlutoPython.py" download="PlutoPython.py">Download</a>
-                        </div>
-                    </article>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2026 Multimedia &amp; Authoring Website</p>
-        </footer>
-    </div>
-
-    <div id="code-modal" class="modal" aria-hidden="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-title">Python Code</h3>
-                <div class="modal-header-actions">
-                    <button class="modal-download btn-download-code" type="button">Download</button>
-                    <button class="modal-close" aria-label="Close modal">&times;</button>
+                    <div class="data-card">
+                        <h4>Venus</h4>
+                        <p>Radius: 0.72 AU &nbsp;|&nbsp; Period: 225d</p>
+                    </div>
+                    <div class="data-card">
+                        <h4>Earth</h4>
+                        <p>Radius: 1.00 AU &nbsp;|&nbsp; Period: 365d</p>
+                    </div>
+                    <div class="data-card">
+                        <h4>Mars</h4>
+                        <p>Radius: 1.52 AU &nbsp;|&nbsp; Period: 687d</p>
+                    </div>
+                    <div class="data-card">
+                        <h4>Jupiter</h4>
+                        <p>Radius: 5.20 AU &nbsp;|&nbsp; Period: 11.9yr</p>
+                    </div>
+                    <div class="data-card">
+                        <h4>Saturn</h4>
+                        <p>Radius: 9.58 AU &nbsp;|&nbsp; Period: 29.5yr</p>
+                    </div>
                 </div>
             </div>
-            <div class="modal-body">
-                <pre><code id="modal-code-block"></code></pre>
+        </section>
+
+        <!-- AGE CALCULATOR -->
+        <section class="section reveal" id="age-calculator">
+            <div class="container">
+                <div class="calc-box">
+                    <h2>Planetary Age Calculator</h2>
+                    <p style="color: var(--text-muted); margin-top: 1rem;">Enter an age in Earth years to see the equivalent age on each planet.</p>
+                    
+                    <form class="age-calculator-form" data-age-calculator-form>
+                        <div class="calc-input-group">
+                            <input id="earth-years" name="earth-years" type="number" min="0" step="0.1" value="1" placeholder="Earth Years">
+                            <button type="submit" class="btn btn-glow" style="padding: 1rem 2rem; border-radius: 12px; font-family: var(--font-body);">Calculate</button>
+                        </div>
+                    </form>
+                    
+                    <div class="age-calculator-results data-grid" data-age-calculator-results aria-live="polite" style="margin-top: 3rem;">
+                        <!-- Results dynamically injected here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CELESTIAL BODIES (MODELS) -->
+        <section class="section reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Celestial Models</h2>
+                </div>
+                
+                <div class="bento-grid">
+                    <!-- Sun -->
+                    <div class="bento-card bento-half">
+                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
+                            <video controls preload="metadata" style="background:#000;">
+                                <source src="Celestial Bodies/Sun Model 0001-0250.mkv" type="video/x-matroska">
+                            </video>
+                        </div>
+                        <h3>Sun</h3>
+                        <p>The star at the center of the solar system and the main source of light and energy. Age: 4.6 billion years.</p>
+                        <button class="btn btn-glass btn-view-code" data-code="Python Code/SunPython.py" data-title="Sun Python Code" style="width: 100%;">View Generation Code</button>
+                    </div>
+
+                    <!-- Mercury -->
+                    <div class="bento-card bento-half">
+                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
+                            <video controls preload="metadata" style="background:#000;">
+                                <source src="Celestial Bodies/Spinning Mercury 0001-0250.mkv" type="video/x-matroska">
+                            </video>
+                        </div>
+                        <h3>Mercury</h3>
+                        <p>The smallest and fastest planet, with a heavily cratered surface. Orbital period: 88 Earth days.</p>
+                        <button class="btn btn-glass btn-view-code" data-code="Python Code/MercuryPython.py" data-title="Mercury Python Code" style="width: 100%;">View Generation Code</button>
+                    </div>
+                    
+                    <!-- Venus -->
+                    <div class="bento-card bento-half">
+                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
+                            <video controls preload="metadata" style="background:#000;">
+                                <source src="Celestial Bodies/Spinning Venus 0001-0250.mkv" type="video/x-matroska">
+                            </video>
+                        </div>
+                        <h3>Venus</h3>
+                        <p>A dense, hot world wrapped in thick clouds and intense greenhouse conditions. Orbital period: 225 Earth days.</p>
+                        <button class="btn btn-glass btn-view-code" data-code="Python Code/VenusPython.py" data-title="Venus Python Code" style="width: 100%;">View Generation Code</button>
+                    </div>
+
+                    <!-- Earth -->
+                    <div class="bento-card bento-half">
+                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
+                            <video controls preload="metadata" style="background:#000;">
+                                <source src="Celestial Bodies/0001-0250.mkv" type="video/x-matroska">
+                            </video>
+                        </div>
+                        <h3>Earth</h3>
+                        <p>The third planet from the Sun and the only known planet to support life. Orbital period: 365.25 Earth days.</p>
+                        <button class="btn btn-glass btn-view-code" data-code="Python Code/EarthPythno.py" data-title="Earth Python Code" style="width: 100%;">View Generation Code</button>
+                    </div>
+                    
+                    <!-- Mars -->
+                    <div class="bento-card bento-half">
+                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
+                            <video controls preload="metadata" style="background:#000;">
+                                <source src="Celestial Bodies/Mars Model 0001-0250.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <h3>Mars</h3>
+                        <p>The red planet, known for dusty plains, giant volcanoes, and polar ice caps. Orbital period: 687 Earth days.</p>
+                        <button class="btn btn-glass btn-view-code" data-code="Python Code/MarsPython.py" data-title="Mars Python Code" style="width: 100%;">View Generation Code</button>
+                    </div>
+
+                    <!-- Jupiter -->
+                    <div class="bento-card bento-half">
+                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
+                            <video controls preload="metadata" style="background:#000;">
+                                <source src="Celestial Bodies/Jupiter Model 0001-0250.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <h3>Jupiter</h3>
+                        <p>The largest planet, a gas giant with powerful storms and many moons. Orbital period: 11.86 Earth years.</p>
+                        <button class="btn btn-glass btn-view-code" data-code="Python Code/JupiterPython.py" data-title="Jupiter Python Code" style="width: 100%;">View Generation Code</button>
+                    </div>
+
+                    <!-- Saturn -->
+                    <div class="bento-card bento-half">
+                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
+                            <video controls preload="metadata" style="background:#000;">
+                                <source src="Celestial Bodies/Saturn Model 0001-0250.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <h3>Saturn</h3>
+                        <p>Known for its bright rings and wide system of moons. Orbital period: 29.46 Earth years.</p>
+                        <button class="btn btn-glass btn-view-code" data-code="Python Code/SaturnPython.py" data-title="Saturn Python Code" style="width: 100%;">View Generation Code</button>
+                    </div>
+
+                    <!-- Uranus -->
+                    <div class="bento-card bento-half">
+                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
+                            <video controls preload="metadata" style="background:#000;">
+                                <source src="Celestial Bodies/Uranus Model 0001-0250.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <h3>Uranus</h3>
+                        <p>An ice giant with a blue-green color and a tilted rotation axis. Orbital period: 84 Earth years.</p>
+                        <button class="btn btn-glass btn-view-code" data-code="Python Code/UranusPython.py" data-title="Uranus Python Code" style="width: 100%;">View Generation Code</button>
+                    </div>
+
+                    <!-- Neptune -->
+                    <div class="bento-card bento-half">
+                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
+                            <video controls preload="metadata" style="background:#000;">
+                                <source src="Celestial Bodies/Neptune Model 0001-0250.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <h3>Neptune</h3>
+                        <p>A cold blue ice giant with strong winds and storms. Orbital period: 164.8 Earth years.</p>
+                        <button class="btn btn-glass btn-view-code" data-code="Python Code/NeptunePython.py" data-title="Neptune Python Code" style="width: 100%;">View Generation Code</button>
+                    </div>
+
+                    <!-- Pluto -->
+                    <div class="bento-card bento-half">
+                        <div class="bento-visual" style="height: 200px; margin-bottom: 1.5rem;">
+                            <video controls preload="metadata" style="background:#000;">
+                                <source src="Celestial Bodies/Pluto Model0001-0250.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <h3>Pluto (Dwarf)</h3>
+                        <p>A small icy dwarf planet in the outer solar system. Orbital period: 248 Earth years.</p>
+                        <button class="btn btn-glass btn-view-code" data-code="Python Code/PlutoPython.py" data-title="Pluto Python Code" style="width: 100%;">View Generation Code</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Multimedia &amp; Authoring &nbsp;|&nbsp; Premium Design</p>
+    </footer>
+
+    <!-- CODE MODAL (from previous JS implementation, styling inline to avoid issues) -->
+    <div id="code-modal" class="modal" aria-hidden="true" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center;">
+        <div class="modal-content" style="background: var(--bg-dark); border: 1px solid var(--card-border); border-radius: 16px; width: 90%; max-width: 1000px; height: 80vh; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="modal-header" style="padding: 1.5rem; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center;">
+                <h3 id="modal-title" style="font-family: var(--font-display); margin: 0;">Python Code</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="modal-download btn-download-code btn btn-glass" type="button" style="padding: 0.5rem 1rem;">Download</button>
+                    <button class="modal-close btn btn-glass" aria-label="Close modal" style="padding: 0.5rem 1rem; color: #ff5555;">Close X</button>
+                </div>
+            </div>
+            <div class="modal-body" style="padding: 1.5rem; flex: 1; overflow: auto; background: #000;">
+                <pre style="margin: 0;"><code id="modal-code-block" style="font-family: var(--font-mono); color: var(--accent-main);"></code></pre>
             </div>
         </div>
     </div>
 
-    <script src="script.js?v=20260706"></script>
+    <script src="script.js?v=20260706e"></script>
     <script>
-        // Sticky header scroll class
         (function () {
             var header = document.getElementById('site-header');
             if (!header) return;
-            var sentinel = document.createElement('div');
-            sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;pointer-events:none;';
-            document.body.prepend(sentinel);
-            new IntersectionObserver(function (entries) {
-                entries.forEach(function (e) { header.classList.toggle('scrolled', !e.isIntersecting); });
-            }, { threshold: 0, rootMargin: '-60px 0px 0px 0px' }).observe(sentinel);
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Modal closing patch
+            document.querySelectorAll('.modal-close').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.getElementById('code-modal').style.display = 'none';
+                });
+            });
         }());
     </script>
 </body>

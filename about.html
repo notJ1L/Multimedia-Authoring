@@ -1,71 +1,260 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — Jonel A. Caisip</title>
-    <link rel="stylesheet" href="styles.css?v=20260622a">
-    <meta name="description" content="About Jonel A. Caisip — 2nd-year BSIT student, DOST & LANI scholar, University Student Government representative.">
+    <title>About Me - Jonel A. Caisip</title>
+    <link rel="stylesheet" href="styles.css?v=20260706g">
+    <meta name="description" content="About Jonel A. Caisip — 2nd-year BSIT student, DOST & LANI scholar.">
+    <style>
+        /* Specific About Page Styles */
+        .about-page-main {
+            padding-top: 150px;
+            padding-bottom: 6rem;
+        }
+
+        .about-bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+
+        .profile-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4rem;
+        }
+
+        .profile-bg-glow {
+            position: absolute;
+            top: -50%; left: -20%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(112,0,255,0.2) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .profile-content {
+            position: relative;
+            z-index: 1;
+            max-width: 60%;
+        }
+
+        .profile-visual {
+            position: relative;
+            width: 250px; height: 250px;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1;
+        }
+
+        /* 3D Wireframe Globe CSS */
+        .wireframe-globe {
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate-globe 15s linear infinite;
+            box-shadow: 0 0 30px rgba(0,240,255,0.1), inset 0 0 30px rgba(0,240,255,0.1);
+        }
+
+        .wireframe-globe::before, .wireframe-globe::after {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 50%; border: 1px solid rgba(0, 240, 255, 0.4);
+        }
+        .wireframe-globe::before { transform: rotateY(60deg); }
+        .wireframe-globe::after { transform: rotateY(120deg); }
+        
+        .wg-ring {
+            position: absolute; top: 50%; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 50%; border: 1px solid rgba(0, 240, 255, 0.4);
+            transform: translateY(-50%) rotateX(70deg);
+        }
+
+        @keyframes rotate-globe {
+            0% { transform: rotateX(15deg) rotateY(0deg); }
+            100% { transform: rotateX(15deg) rotateY(360deg); }
+        }
+
+        .terminal-card {
+            background: #0a0a0e;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            padding: 2.5rem;
+        }
+
+        .terminal-command { color: var(--accent-cyan); font-weight: 600; }
+        .terminal-output { color: var(--text-muted); margin-bottom: 1.5rem; }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1em;
+            background-color: var(--accent-cyan);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tech-tag {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            font-family: var(--font-mono);
+            color: #fff;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: rgba(0, 240, 255, 0.5);
+            color: #00f0ff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+        }
+
+        @media (max-width: 900px) {
+            .about-bento-grid > div { grid-column: span 12 !important; }
+            .profile-card { flex-direction: column; text-align: center; padding: 3rem 2rem; }
+            .profile-content { max-width: 100%; }
+            .profile-bg-glow { left: 50%; transform: translateX(-50%); }
+            .profile-visual { margin-top: 3rem; }
+        }
+    </style>
 </head>
-<body>
-    <div class="bg-scene" aria-hidden="true">
-        <div class="bg-gradient"></div>
-        <div class="bg-orb orb-a"></div>
-        <div class="bg-orb orb-b"></div>
-        <div class="bg-orb orb-c"></div>
-        <div class="bg-grid"></div>
-    </div>
+<body class="page--home">
+    <div class="bg-mesh" aria-hidden="true"></div>
 
-    <div class="page-shell">
-        <header class="site-header">
-            <div class="brand-block reveal visible">
-                <p class="eyebrow">BSIT-S-2A</p>
-                <h1>About — Jonel A. Caisip</h1>
+    <header class="site-header" id="site-header">
+        <div class="brand-block">
+            <span class="eyebrow">BSIT-S-2A</span>
+            <h1>Multimedia &amp; Authoring</h1>
+        </div>
+        <nav class="main-nav" aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="solar-system.html">Solar System</a></li>
+                <li><a href="rotoscope.html">Rotoscope</a></li>
+                <li><a href="about.html" class="active">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="about-page-main reveal visible">
+        <div class="container">
+            <div class="about-bento-grid">
+                
+                <!-- Main Profile Card -->
+                <div class="bento-card profile-card" style="grid-column: span 8;">
+                    <div class="profile-bg-glow"></div>
+                    <div class="profile-content">
+                        <span class="hero-badge">System Profile</span>
+                        <h2 class="hero-title" style="font-size: clamp(3rem, 5vw, 4rem); margin-bottom: 1rem;">Jonel A. <br><span class="text-gradient-accent">Caisip</span></h2>
+                        <p class="hero-description" style="margin-bottom: 2rem;">
+                            2nd-year BSIT student at Technological University of the Philippines - Taguig (TUP-T). DOST &amp; LANI scholar.
+                        </p>
+                        <div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 10px 20px; border-radius: 50px; display: inline-flex;">
+                            <span class="pulse-dot" style="width: 6px; height: 6px;"></span>
+                            STATUS: OPEN TO COLLABORATION
+                        </div>
+                    </div>
+                    <div class="profile-visual">
+                        <div class="wireframe-globe">
+                            <div class="wg-ring"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terminal Card -->
+                <div class="bento-card terminal-card" style="grid-column: span 4;">
+                    <div class="mac-dots" style="margin-bottom: 2rem;">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    </div>
+                    <div>
+                        <div class="terminal-command">&gt; whoami</div>
+                        <div class="terminal-output">Jonel A. Caisip</div>
+                        
+                        <div class="terminal-command">&gt; role</div>
+                        <div class="terminal-output">University Student Government representative</div>
+                        
+                        <div class="terminal-command">&gt; mission</div>
+                        <div class="terminal-output">Blending creative design with robust code to build immersive experiences.</div>
+                        
+                        <div class="terminal-command">&gt; status<span class="typing-cursor"></span></div>
+                    </div>
+                </div>
+
+                <!-- Technical Arsenal Card -->
+                <div class="bento-card" style="grid-column: span 7; padding: 3rem;">
+                    <h3 style="margin-bottom: 2rem; display: flex; align-items: center; gap: 12px; font-size: 1.5rem;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        Technical Arsenal
+                    </h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">Laravel</span>
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">ESP32</span>
+                        <span class="tech-tag">Blender 3D</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">HTML / CSS</span>
+                        <span class="tech-tag">System Administration</span>
+                    </div>
+                </div>
+
+                <!-- Purpose / Video Background Card -->
+                <div class="bento-card" style="grid-column: span 5; padding: 3rem; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center;">
+                    <!-- Video background playing silently -->
+                    <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.15; z-index: 0; pointer-events: none;">
+                        <source src="Celestial Bodies/Caisip - Solar System.mp4" type="video/mp4">
+                    </video>
+                    <!-- Deep gradient to ensure text readability -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(10,10,16,1) 0%, rgba(10,10,16,0.3) 100%); z-index: 1;"></div>
+                    
+                    <div style="position: relative; z-index: 2;">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">About This Site</h3>
+                        <p style="color: var(--text-muted); line-height: 1.7; margin: 0;">
+                            Created to showcase multimedia projects and share practical guides on OS installations and technical workflows. A living portfolio of hands-on projects blending creative design with code.
+                        </p>
+                    </div>
+                </div>
+
             </div>
-            <nav class="main-nav" aria-label="Main navigation">
-                <ul>
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#portfolio">Portfolio</a></li>
-                    <li><a href="solar-system.html">Solar System</a></li>
-                    <li><a href="rotoscope.html">Rotoscope</a></li>
-                    <li><a href="about.html" aria-current="page">About</a></li>
-                </ul>
-            </nav>
-        </header>
+        </div>
+    </main>
 
-        <main>
-            <section class="panel hero reveal visible">
-                <h2>Hello — I'm Jonel A. Caisip</h2>
-                <p class="video-meta">2nd-year BSIT student — Technological University of the Philippines - Taguig (TUP-T)</p>
-                <p class="video-meta">DOST &amp; LANI scholar · University Student Government representative</p>
-            </section>
+    <footer>
+        <p>&copy; 2026 Jonel A. Caisip — Multimedia &amp; Authoring &nbsp;|&nbsp; Premium Design</p>
+    </footer>
 
-            <section class="panel reveal visible">
-                <h2>About this site</h2>
-                <p>
-                    I created this website to showcase my YouTube projects and to share practical guides about operating system
-                    installations and technical workflows. It also serves as a living portfolio of my hands-on projects.
-                </p>
-            </section>
-
-            <section class="panel reveal visible">
-                <h2>Technical interests</h2>
-                <ul class="resource-list">
-                    <li>Web development with Laravel and PHP</li>
-                    <li>PC building and system administration</li>
-                    <li>Embedded systems: Arduino and ESP32 projects</li>
-                    <li>3D graphics and automation with Blender + Python</li>
-                </ul>
-            </section>
-
-            <!-- Contact details intentionally omitted by request -->
-        </main>
-
-        <footer>
-            <p>&copy; 2026 Jonel A. Caisip — Multimedia &amp; Authoring</p>
-        </footer>
-    </div>
-
-    <script src="script.js?v=20260622a"></script>
+    <script src="script.js?v=20260706g"></script>
+    <script>
+        (function () {
+            var header = document.getElementById('site-header');
+            if (!header) return;
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }());
+    </script>
 </body>
 </html>

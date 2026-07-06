@@ -4,113 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multimedia &amp; Authoring</title>
-    <meta name="description" content="Multimedia &amp; Authoring — a portfolio showcasing 3D solar system rendering and rotoscope animation, blending creative technology and motion-based storytelling.">
-    <link rel="stylesheet" href="styles.css?v=20260706">
+    <meta name="description" content="Multimedia &amp; Authoring — a portfolio showcasing 3D solar system rendering and rotoscope animation.">
+    <link rel="stylesheet" href="styles.css?v=20260706f">
 </head>
-<body>
-    <div class="bg-scene" aria-hidden="true">
-        <div class="bg-gradient"></div>
-        <div class="bg-orb orb-a"></div>
-        <div class="bg-orb orb-b"></div>
-        <div class="bg-orb orb-c"></div>
-        <div class="bg-grid"></div>
-    </div>
+<body class="page--home">
+    <div class="bg-mesh" aria-hidden="true"></div>
 
-    <div class="page-shell">
-        <header class="site-header" id="site-header">
-            <div class="brand-block reveal">
-                <div class="brand-top">
-                    <span class="status-dot" aria-hidden="true"></span>
-                    <p class="eyebrow">BSIT-S-2A &nbsp;/&nbsp; STATUS: ONLINE</p>
-                </div>
-                <h1>Multimedia &amp; Authoring</h1>
+    <header class="site-header" id="site-header">
+        <div class="brand-block">
+            <span class="eyebrow">BSIT-S-2A</span>
+            <h1>Multimedia &amp; Authoring</h1>
+        </div>
+        <nav class="main-nav" aria-label="Main navigation">
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="solar-system.html">Solar System</a></li>
+                <li><a href="rotoscope.html">Rotoscope</a></li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- IMMERSIVE HERO -->
+        <section id="home" class="hero-section reveal visible">
+            <!-- Background Video -->
+            <div class="hero-bg-video">
+                <video autoplay loop muted playsinline>
+                    <source src="Celestial Bodies/Caisip - Solar System.mp4" type="video/mp4">
+                </video>
+                <div class="hero-bg-overlay"></div>
             </div>
-            <nav class="main-nav" aria-label="Main navigation">
-                <ul>
-                    <li><a href="#home" aria-current="page">Home</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="solar-system.html">Solar System</a></li>
-                    <li><a href="rotoscope.html">Rotoscope</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
-        </header>
 
-        <main>
-            <section id="home" class="panel hero reveal">
-                <div class="hero--asymmetric">
-                    <div class="hero-text">
-                        <span class="mono-label">// MISSION OVERVIEW</span>
-                        <h2>Welcome to Multimedia &amp; Authoring</h2>
-                        <p>
-                            Blending the craft of rotoscoping with the depth of 3D rendering,
-                            this space highlights how creative ideas and technology come together
-                            to build immersive motion-based stories.
+            <div class="hero-content-wrapper">
+                <div class="container hero-container">
+                    <!-- Left: Text Block -->
+                    <div class="hero-text-block">
+                        <div class="hero-badge-glass">
+                            <span class="pulse-dot"></span> BSIT-S-2A Final Portfolio
+                        </div>
+                        <h2 class="hero-title">
+                            <span class="text-light">Motion &amp;</span><br>
+                            <span class="text-gradient-accent">3D Reality.</span>
+                        </h2>
+                        <p class="hero-description">
+                            Blending the craft of rotoscoping with the depth of procedural 3D rendering. Explore an immersive portfolio of motion-based storytelling.
                         </p>
+                        <div class="hero-buttons">
+                            <a href="#portfolio" class="btn btn-glow-large">
+                                Explore Work 
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                            <a href="rotoscope.html" class="btn btn-glass-large">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                Rotoscope
+                            </a>
+                        </div>
                     </div>
+                    
+                    <!-- Right: Floating Glass Cards -->
+                    <div class="hero-visual-block">
+                        <div class="floating-glass-card main-card">
+                            <div class="card-glass-header">
+                                <div class="mac-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="glass-title">rendering_engine.exe</span>
+                            </div>
+                            <div class="card-glass-body">
+                                <div class="mini-solar-system">
+                                    <div class="m-ring m-ring-3"><div class="m-planet p-3"></div></div>
+                                    <div class="m-ring m-ring-2"><div class="m-planet p-2"></div></div>
+                                    <div class="m-ring m-ring-1"><div class="m-planet p-1"></div></div>
+                                    <div class="m-sun"></div>
+                                </div>
+                            </div>
+                            <div class="card-glass-footer">
+                                <span>Status: <strong style="color:var(--accent-cyan)">Online</strong></span>
+                                <span>FPS: <strong>60</strong></span>
+                            </div>
+                        </div>
 
-                    <div class="hero-orbit" aria-hidden="true">
-                        <div class="orbit-ring orbit-ring--4"><div class="orbit-planet"></div></div>
-                        <div class="orbit-ring orbit-ring--3"><div class="orbit-planet"></div></div>
-                        <div class="orbit-ring orbit-ring--2"><div class="orbit-planet"></div></div>
-                        <div class="orbit-ring orbit-ring--1"><div class="orbit-planet"></div></div>
-                        <div class="orbit-sun"></div>
+                        <div class="floating-glass-card secondary-card">
+                            <div class="roto-preview">
+                                <div class="r-frame"></div>
+                                <div class="r-frame r-active"></div>
+                                <div class="r-frame"></div>
+                            </div>
+                            <p>Sequence Analysis</p>
+                            <span class="roto-time">00:01:45:22</span>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+            
+            <div class="scroll-indicator">
+                <div class="mouse"><div class="wheel"></div></div>
+                <span>Scroll</span>
+            </div>
+        </section>
 
-            <section id="portfolio" class="panel reveal">
-                <span class="mono-label">// PORTFOLIO INDEX</span>
-                <h2>Portfolio</h2>
-                <div class="topic-grid">
-                    <article class="topic reveal" data-accent="solar">
-                        <span class="mono-label">PROJECT-01</span>
-                        <h3>3D Solar System</h3>
-                        <p>A 3D model and animation project showcasing the planets and their motion.</p>
-                        <button class="topic-button" type="button" data-url="solar-system.html">View Project</button>
-                    </article>
-                    <article class="topic reveal" data-accent="rotoscope">
-                        <span class="mono-label">PROJECT-02</span>
-                        <h3>1 Minute Rotoscope Video</h3>
-                        <p>A one-minute rotoscope animation focused on frame-by-frame visual storytelling.</p>
-                        <button class="topic-button" type="button" data-url="rotoscope.html">Watch Video</button>
-                    </article>
+        <!-- PORTFOLIO BENTO GRID -->
+        <section id="portfolio" class="section reveal">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Work</h2>
                 </div>
-            </section>
+                
+                <div class="poster-grid">
+                    <!-- Project 1: Solar System (Poster) -->
+                    <div class="poster-card reveal">
+                        <div class="poster-bg">
+                            <video autoplay loop muted playsinline>
+                                <source src="Celestial Bodies/Caisip - Solar System.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="poster-overlay"></div>
+                        <div class="poster-content">
+                            <div class="poster-text">
+                                <span class="card-number">01</span>
+                                <h3>3D Solar System</h3>
+                                <p>A procedurally generated 3D model and animation project built in Blender with Python scripting, showcasing orbital mechanics and planetary textures.</p>
+                            </div>
+                            <div class="poster-action">
+                                <a href="solar-system.html" class="btn btn-glow-large">Explore the System</a>
+                            </div>
+                        </div>
+                    </div>
 
-            <section id="about" class="panel reveal">
-                <span class="mono-label">// ABOUT</span>
-                <h2>About</h2>
-                <p>
-                    Multimedia &amp; Authoring is focused on creative digital production, interactive storytelling,
-                    and clean web experiences. This page highlights selected work and the design approach behind it.
-                </p>
-            </section>
-        </main>
+                    <!-- Project 2: Rotoscope (Poster) -->
+                    <div class="poster-card reveal">
+                        <div class="poster-bg">
+                            <iframe src="https://www.youtube.com/embed/aim7OZGXRA0?autoplay=1&mute=1&controls=0&loop=1&playlist=aim7OZGXRA0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <div class="poster-overlay"></div>
+                        <div class="poster-content">
+                            <div class="poster-text">
+                                <span class="card-number">02</span>
+                                <h3>1 Minute Rotoscope</h3>
+                                <p>A detailed frame-by-frame visual storytelling animation, demonstrating patience and precision in motion graphics over 12 weeks of rendering.</p>
+                            </div>
+                            <div class="poster-action">
+                                <a href="rotoscope.html" class="btn btn-glow-large" style="background: linear-gradient(135deg, #ff5500, #ffaa00);">Watch Animation</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        <footer>
-            <p>&copy; 2026 Multimedia &amp; Authoring Website</p>
-        </footer>
-    </div>
+    <footer>
+        <p>&copy; 2026 Multimedia &amp; Authoring &nbsp;|&nbsp; Premium Design</p>
+    </footer>
 
-    <script src="script.js?v=20260706"></script>
+    <script src="script.js?v=20260706e"></script>
     <script>
-        // Sticky header scroll class
         (function () {
             var header = document.getElementById('site-header');
             if (!header) return;
-            var observer = new IntersectionObserver(
-                function (entries) {
-                    entries.forEach(function (entry) {
-                        header.classList.toggle('scrolled', !entry.isIntersecting);
-                    });
-                },
-                { threshold: 0, rootMargin: '-60px 0px 0px 0px' }
-            );
-            var sentinel = document.createElement('div');
-            sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;pointer-events:none;';
-            document.body.prepend(sentinel);
-            observer.observe(sentinel);
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
         }());
     </script>
 </body>
