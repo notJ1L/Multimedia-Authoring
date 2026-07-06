@@ -323,6 +323,82 @@
             <!-- Animated Ambient Background Orb -->
             <div style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); width: 80vw; height: 600px; max-width: 1000px; background: radial-gradient(ellipse, rgba(139, 127, 245, 0.15) 0%, rgba(0, 240, 255, 0.05) 40%, transparent 70%); filter: blur(60px); z-index: 0; pointer-events: none; border-radius: 50%; animation: pulseOrb 8s infinite alternate ease-in-out;"></div>
 
+            <!-- Warp Speed Canvas -->
+            <canvas id="warpCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.5;"></canvas>
+
+            <script>
+                (function() {
+                    const canvas = document.getElementById('warpCanvas');
+                    if (!canvas) return;
+                    const ctx = canvas.getContext('2d');
+                    let width, height, stars = [];
+                    const numStars = 350;
+                    const speed = 3;
+
+                    function resize() {
+                        const rect = canvas.parentElement.getBoundingClientRect();
+                        width = canvas.width = rect.width || window.innerWidth;
+                        height = canvas.height = rect.height || window.innerHeight;
+                    }
+                    
+                    class Star {
+                        constructor() {
+                            this.reset();
+                            this.z = Math.random() * width;
+                        }
+                        reset() {
+                            this.x = (Math.random() - 0.5) * width * 2;
+                            this.y = (Math.random() - 0.5) * height * 2;
+                            this.z = width;
+                            this.pz = this.z;
+                            this.color = Math.random() > 0.5 ? '139, 127, 245' : '0, 240, 255';
+                        }
+                        update() {
+                            this.pz = this.z;
+                            this.z -= speed;
+                            if (this.z < 1) {
+                                this.reset();
+                                this.pz = this.z;
+                            }
+                        }
+                        draw() {
+                            if (!width || !height) return;
+                            let sx = (this.x / this.z) * width + width / 2;
+                            let sy = (this.y / this.z) * height + height / 2;
+                            let px = (this.x / this.pz) * width + width / 2;
+                            let py = (this.y / this.pz) * height + height / 2;
+
+                            ctx.beginPath();
+                            ctx.moveTo(px, py);
+                            ctx.lineTo(sx, sy);
+                            let opacity = 1 - (this.z / width);
+                            ctx.lineWidth = Math.max(0.5, opacity * 3);
+                            ctx.strokeStyle = `rgba(${this.color}, ${opacity})`;
+                            ctx.stroke();
+                        }
+                    }
+
+                    function init() {
+                        resize();
+                        window.addEventListener('resize', resize);
+                        for (let i = 0; i < numStars; i++) stars.push(new Star());
+                        animate();
+                    }
+
+                    function animate() {
+                        ctx.clearRect(0, 0, width, height);
+                        for (let star of stars) {
+                            star.update();
+                            star.draw();
+                        }
+                        requestAnimationFrame(animate);
+                    }
+
+                    // Run immediately since script is below canvas
+                    init();
+                })();
+            </script>
+
             <style>
                 @keyframes pulseOrb {
                     0% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.95); }
@@ -331,56 +407,67 @@
                 .premium-title {
                     font-family: var(--font-display);
                     font-size: clamp(4rem, 10vw, 8rem);
-                    font-weight: 800;
+                    font-weight: 900;
                     line-height: 0.95;
-                    letter-spacing: -0.04em;
+                    letter-spacing: 0.02em;
                     margin-bottom: 1.5rem;
                     position: relative;
                     z-index: 2;
+                    text-transform: uppercase;
                 }
                 .premium-title-overline {
                     display: block;
                     font-family: var(--font-mono);
                     font-size: clamp(0.9rem, 2vw, 1.2rem);
-                    color: #8B7FF5;
+                    color: #00F0FF;
                     text-transform: uppercase;
-                    letter-spacing: 0.3em;
+                    letter-spacing: 0.4em;
                     margin-bottom: 1.5rem;
                     font-weight: 600;
                 }
                 .premium-title-main {
-                    background: linear-gradient(180deg, #FFFFFF 0%, #A9B1D6 100%);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+                    color: #fff;
+                    text-shadow: 0 0 15px rgba(0, 240, 255, 0.8), 0 0 30px rgba(0, 240, 255, 0.4), 0 0 45px rgba(139, 127, 245, 0.6);
                 }
                 .premium-desc {
-                    font-size: clamp(1.1rem, 2vw, 1.4rem);
-                    color: #8a94b5;
-                    max-width: 650px;
+                    font-size: 1rem;
+                    font-family: var(--font-mono);
+                    color: #00F0FF;
+                    opacity: 0.8;
+                    max-width: 750px;
                     margin: 0 auto 3.5rem;
-                    line-height: 1.6;
+                    line-height: 1.8;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
                     position: relative;
                     z-index: 2;
                 }
                 .premium-badge {
                     display: inline-flex;
                     align-items: center;
-                    gap: 8px;
-                    padding: 8px 16px;
-                    background: rgba(255, 255, 255, 0.02);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    border-radius: 100px;
+                    gap: 12px;
+                    padding: 8px 20px;
+                    background: rgba(0, 240, 255, 0.05);
+                    border: 1px solid rgba(0, 240, 255, 0.2);
+                    border-left: 4px solid #00F0FF;
+                    border-right: 4px solid #00F0FF;
                     font-family: var(--font-mono);
-                    font-size: 0.8rem;
-                    color: #E2E8F0;
-                    letter-spacing: 0.05em;
+                    font-size: 0.85rem;
+                    color: #00F0FF;
+                    letter-spacing: 0.15em;
                     text-transform: uppercase;
                     backdrop-filter: blur(12px);
                     position: relative;
                     z-index: 2;
-                    margin-bottom: 2rem;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                    margin-bottom: 2.5rem;
+                    box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+                }
+                .sci-fi-grid {
+                    position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 1;
+                    background-image: linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+                    background-size: 50px 50px;
+                    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+                    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
                 }
                 .premium-badge-dot {
                     width: 6px;
@@ -397,11 +484,12 @@
             </style>
 
             <div class="container" style="position: relative; z-index: 2;">
+                <div class="sci-fi-grid"></div>
                 
                 <div style="min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 2rem;">
                     <div class="premium-badge">
                         <span class="premium-badge-dot"></span>
-                        Project 01: Blender Rendering
+                        SYS_OBJ_01: BLENDER RENDERING
                     </div>
 
                     <h1 class="premium-title">
@@ -410,7 +498,7 @@
                     </h1>
                     
                     <p class="premium-desc">
-                        A procedurally generated 3D solar system focused on uncompromising realism, orbital motion, and the clear presentation of planetary mechanics.
+                        [INITIATING...] A procedurally generated 3D solar system focused on uncompromising realism, orbital motion, and the clear presentation of planetary mechanics.
                     </p>
                 </div>
                 
@@ -875,10 +963,207 @@
                 </div>
             </div>
         </section>
+
+        <!-- STEP BY STEP TUTORIAL -->
+        <section class="tutorial-section reveal" style="padding: 6rem 0; background: rgba(10,10,15,0.4); border-top: 1px solid rgba(255,255,255,0.05);">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <span class="premium-title-overline" style="margin-bottom: 0.5rem; font-size: 0.9rem;">Tutorial</span>
+                    <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1rem;">How It's Made</h2>
+                    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">A complete step-by-step breakdown of how these procedural planet animations are generated in Blender 3D using Python scripting.</p>
+                </div>
+
+                <style>
+                    .step-row { display: flex; align-items: center; gap: 5rem; margin-bottom: 8rem; }
+                    .step-row:nth-child(even) { flex-direction: row-reverse; }
+                    .step-row:last-child { margin-bottom: 0; }
+                    
+                    .step-image-container {
+                        flex: 1; position: relative; border-radius: 24px; overflow: hidden;
+                        box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(139, 127, 245, 0.15);
+                        border: 1px solid rgba(255,255,255,0.05);
+                    }
+                    .step-image-container img {
+                        width: 100%; height: auto; display: block; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+                    }
+                    .step-row:hover .step-image-container img { transform: scale(1.03); }
+                    
+                    .step-text { flex: 1; position: relative; }
+                    
+                    .step-number-bg {
+                        position: absolute; top: -70px; left: -40px; font-size: 12rem; font-weight: 900;
+                        font-family: var(--font-display); color: transparent;
+                        -webkit-text-stroke: 2px rgba(255,255,255,0.03); z-index: 0; pointer-events: none;
+                    }
+                    .step-row:nth-child(even) .step-number-bg { left: auto; right: -40px; }
+                    
+                    .step-content { position: relative; z-index: 1; padding: 2rem 0; }
+                    
+                    .step-badge {
+                        display: inline-block; padding: 0.4rem 1rem; border-radius: 50px;
+                        background: rgba(139, 127, 245, 0.1); color: #8B7FF5; font-family: var(--font-mono);
+                        font-weight: 600; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1.5rem;
+                        border: 1px solid rgba(139, 127, 245, 0.3); text-transform: uppercase;
+                    }
+                    
+                    .step-title { font-family: var(--font-display); font-size: 2.8rem; margin-bottom: 1.5rem; line-height: 1.1; }
+                    .step-desc { color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; }
+                    
+                    @media (max-width: 900px) {
+                        .step-row, .step-row:nth-child(even) { flex-direction: column; gap: 3rem; margin-bottom: 6rem; }
+                        .step-number-bg { font-size: 7rem; top: -40px; left: -10px !important; right: auto !important; }
+                        .step-title { font-size: 2.2rem; }
+                    }
+                </style>
+
+                <div class="tutorial-flow">
+                    
+                    <!-- Step 1 -->
+                    <div class="step-row reveal">
+                        <div class="step-image-container">
+                            <img src="Blender Step by Step/STEP 1.png" alt="Step 1: Setup and Import">
+                        </div>
+                        <div class="step-text">
+                            <div class="step-number-bg">01</div>
+                            <div class="step-content">
+                                <span class="step-badge">Phase One</span>
+                                <h3 class="step-title">Setup &amp; Model Import</h3>
+                                <p class="step-desc">Launch Blender and access the sidebar by pressing 'N' on your keyboard. Navigate to the BlenderKit add-on tab, search for high-quality, photorealistic planet models, and seamlessly import your chosen celestial body directly into your 3D viewport to serve as the foundation of your scene.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-row reveal">
+                        <div class="step-image-container">
+                            <img src="Blender Step by Step/STEP 2.png" alt="Step 2: Scripting">
+                        </div>
+                        <div class="step-text">
+                            <div class="step-number-bg">02</div>
+                            <div class="step-content">
+                                <span class="step-badge">Phase Two</span>
+                                <h3 class="step-title">Scripting the Animation</h3>
+                                <p class="step-desc">Instead of manually keyframing the rotation, we leverage the power of Python to procedurally generate flawless, continuous orbital mechanics. Prepare the logic to dictate the rotational speed, axis alignment, and infinite looping behavior of the planet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-row reveal">
+                        <div class="step-image-container">
+                            <img src="Blender Step by Step/STEP 3.png" alt="Step 3: Injecting Code">
+                        </div>
+                        <div class="step-text">
+                            <div class="step-number-bg">03</div>
+                            <div class="step-content">
+                                <span class="step-badge">Phase Three</span>
+                                <h3 class="step-title">Injecting the Code</h3>
+                                <p class="step-desc">Switch your workspace to the 'Scripting' tab in Blender. Create a new text block and paste the generated Python code. Executing this script will instantly bind the mathematical animation data directly to your 3D model, automating the entire animation process.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-row reveal">
+                        <div class="step-image-container">
+                            <img src="Blender Step by Step/STEP 4.png" alt="Step 4: Rendering">
+                        </div>
+                        <div class="step-text">
+                            <div class="step-number-bg">04</div>
+                            <div class="step-content">
+                                <span class="step-badge">Phase Four</span>
+                                <h3 class="step-title">Finalizing &amp; Rendering</h3>
+                                <p class="step-desc">With the procedural animation locked in, adjust your camera framing and ensure your lighting (such as a distant sun lamp) is physically accurate. Finally, configure your output settings and render the animation sequence to produce a stunning, cinematic video of the rotating planet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TOOLS USED -->
+        <section class="tools-section reveal" style="padding: 6rem 0; background: transparent; border-top: 1px solid rgba(255,255,255,0.05);">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <span class="premium-title-overline" style="margin-bottom: 0.5rem; font-size: 0.9rem;">Stack</span>
+                    <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1rem;">Tools Used</h2>
+                    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">The core technologies powering the physics, rendering, and assets of this project.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+                    
+                    <!-- Blender -->
+                    <div class="bento-card" style="padding: 3rem; text-align: center; display: flex; flex-direction: column; align-items: center; border-radius: 24px;">
+                        <div style="width: 80px; height: 80px; border-radius: 20px; background: rgba(232, 125, 13, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; border: 1px solid rgba(232, 125, 13, 0.3); overflow: hidden; padding: 10px;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg" alt="Blender Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 1rem;">Blender 3D</h3>
+                        <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin: 0;">Blender is a powerful open-source 3D creation suite that serves as the core engine for this project. It was used to render the photorealistic environments, calculate the physics-based lighting, and execute the Python scripts that drive the complex orbital mechanics and animations.</p>
+                    </div>
+
+                    <!-- BlenderKit -->
+                    <div class="bento-card" style="padding: 3rem; text-align: center; display: flex; flex-direction: column; align-items: center; border-radius: 24px;">
+                        <div style="width: 80px; height: 80px; border-radius: 20px; background: rgba(0, 240, 255, 0.05); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; border: 1px solid rgba(0, 240, 255, 0.1);">
+                            <div style="width: 44px; height: 50px; background: linear-gradient(135deg, #30c5d2 0%, #68b948 50%, #f64320 100%); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); box-shadow: inset 0 0 10px rgba(0,0,0,0.2);"></div>
+                        </div>
+                        <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 1rem;">BlenderKit</h3>
+                        <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin: 0;">BlenderKit is an extensive online library integrated directly into Blender. It was utilized to source high-quality, pre-configured 3D models and physically based rendering (PBR) materials, allowing us to rapidly populate the solar system with incredibly detailed celestial bodies.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Multimedia &amp; Authoring &nbsp;|&nbsp; Premium Design</p>
+    <footer style="background: rgba(10,10,15,0.8); border-top: 1px solid rgba(255,255,255,0.05); padding: 5rem 0 2rem; margin-top: 4rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-bottom: 4rem;">
+                
+                <!-- Brand -->
+                <div>
+                    <h2 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 1rem; color: #fff; letter-spacing: -0.02em;">
+                        Multimedia &amp; <span style="color: #8B7FF5;">Authoring</span>
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; max-width: 320px;">
+                        A premium showcase of advanced 3D procedural generation, orbital mechanics, and cinematic rotoscoping techniques built for the web.
+                    </p>
+                </div>
+
+                <!-- Navigation -->
+                <div>
+                    <h3 style="font-family: var(--font-mono); font-size: 0.9rem; color: #fff; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem;">Navigation</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;">
+                        <li><a href="index.html" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s ease;">Home</a></li>
+                        <li><a href="solar-system.html" style="color: #8B7FF5; text-decoration: none; transition: color 0.3s ease;">Solar System</a></li>
+                        <li><a href="rotoscope.html" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s ease;">Rotoscope</a></li>
+                        <li><a href="about.html" style="color: var(--text-muted); text-decoration: none; transition: color 0.3s ease;">About Me</a></li>
+                    </ul>
+                </div>
+
+                <!-- Technologies -->
+                <div>
+                    <h3 style="font-family: var(--font-mono); font-size: 0.9rem; color: #fff; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem;">Core Stack</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;">
+                        <li style="color: var(--text-muted); display: flex; align-items: center; gap: 12px;"><div style="width:8px;height:8px;border-radius:50%;background:#e87d0d;box-shadow:0 0 10px #e87d0d;"></div> Blender 3D</li>
+                        <li style="color: var(--text-muted); display: flex; align-items: center; gap: 12px;"><div style="width:8px;height:8px;border-radius:50%;background:#00f0ff;box-shadow:0 0 10px #00f0ff;"></div> BlenderKit</li>
+                        <li style="color: var(--text-muted); display: flex; align-items: center; gap: 12px;"><div style="width:8px;height:8px;border-radius:50%;background:#f5e236;box-shadow:0 0 10px #f5e236;"></div> Python</li>
+                        <li style="color: var(--text-muted); display: flex; align-items: center; gap: 12px;"><div style="width:8px;height:8px;border-radius:50%;background:#ff4d4d;box-shadow:0 0 10px #ff4d4d;"></div> HTML5 / CSS3</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Copyright Bar -->
+            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: var(--text-muted); font-size: 0.85rem; font-family: var(--font-mono); margin: 0; letter-spacing: 0.05em;">
+                    &copy; 2026 Jonel Caisip. All Rights Reserved.
+                </p>
+                <div style="display: flex; gap: 1rem;">
+                    <span style="color: rgba(0,240,255,0.6); font-size: 0.85rem; font-family: var(--font-mono); letter-spacing: 0.1em; border: 1px solid rgba(0,240,255,0.2); padding: 4px 12px; border-radius: 50px;">BSIT-S-2A</span>
+                </div>
+            </div>
+        </div>
     </footer>
 
     
