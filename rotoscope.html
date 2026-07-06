@@ -1,12 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1 Minute Rotoscope Video</title>
-    <link rel="stylesheet" href="styles.css?v=20260622a">
+    <meta name="description" content="A one-minute rotoscope animation — frame-by-frame visual storytelling from initial sketch to final render, built over 12 weeks of iterative progress.">
+    <link rel="stylesheet" href="styles.css?v=20260706">
 </head>
-<body>
+<body class="page--rotoscope">
     <div class="bg-scene" aria-hidden="true">
         <div class="bg-gradient"></div>
         <div class="bg-orb orb-a"></div>
@@ -16,9 +17,12 @@
     </div>
 
     <div class="page-shell">
-        <header class="site-header">
+        <header class="site-header" id="site-header">
             <div class="brand-block reveal visible">
-                <p class="eyebrow">BSIT-S-2A</p>
+                <div class="brand-top">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <p class="eyebrow">BSIT-S-2A &nbsp;/&nbsp; SEQUENCE: ROTO</p>
+                </div>
                 <h1>Multimedia &amp; Authoring</h1>
             </div>
             <nav class="main-nav" aria-label="Main navigation">
@@ -39,6 +43,26 @@
                 <p>
                     The completed one-minute rotoscope animation — frame-by-frame visual storytelling from initial sketch to final render.
                 </p>
+
+                <!-- Filmstrip motif — the orchestrated animation moment for this page -->
+                <div class="filmstrip-wrap" aria-hidden="true">
+                    <div class="filmstrip-header">
+                        <span class="filmstrip-label">ROTOSCOPE PROJECT &nbsp;&#x2F;&#x2F;&nbsp; FRAME SEQUENCE</span>
+                        <span class="filmstrip-timecode" id="roto-timecode">00:00:00</span>
+                    </div>
+                    <div class="filmstrip-track">
+                        <div class="filmstrip-holes" id="filmstrip-holes">
+                            <!-- Frame units injected by JS below -->
+                        </div>
+                    </div>
+                    <div class="filmstrip-footer">
+                        <span class="filmstrip-stat">FPS: 24</span>
+                        <span class="filmstrip-stat">FORMAT: ROTO / RGB</span>
+                        <span class="filmstrip-stat">DURATION: 01:00</span>
+                        <span class="filmstrip-stat">STATUS: RENDERED</span>
+                    </div>
+                </div>
+
                 <div class="video-wrap video-wrap--hero" role="region" aria-label="Final rotoscope project video player">
                     <iframe
                         src="https://www.youtube.com/embed/aim7OZGXRA0"
@@ -52,6 +76,7 @@
             </section>
 
             <section class="panel reveal visible">
+                <span class="mono-label">// WEEKLY SEQUENCE LOG</span>
                 <h2>Weekly Progress Videos</h2>
                 <div class="topic-grid">
                     <article class="topic">
@@ -225,6 +250,7 @@
             </section>
 
             <section class="panel reveal visible">
+                <span class="mono-label">// RAW SOURCE FOOTAGE</span>
                 <h2>1 Minute Raw Clip</h2>
                 <article class="topic topic--wide">
                     <div class="video-wrap" role="region" aria-label="1 minute raw clip video player">
@@ -247,6 +273,60 @@
         </footer>
     </div>
 
-    <script src="script.js?v=20260622a"></script>
+    <script src="script.js?v=20260706"></script>
+    <script>
+        /* ── Rotoscope page: filmstrip + timecode ─────────────── */
+        (function () {
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            /* Build filmstrip frame units */
+            var strip = document.getElementById('filmstrip-holes');
+            if (strip) {
+                var totalUnits = 48; /* doubled so CSS scroll loop is seamless */
+                var html = '';
+                for (var i = 0; i < totalUnits; i++) {
+                    var num = String((i % 24) + 1).padStart(2, '0');
+                    html +=
+                        '<div class="filmstrip-frame-unit">' +
+                            '<div class="sprocket"></div>' +
+                            '<span class="frame-number">' + num + '</span>' +
+                            '<div class="sprocket"></div>' +
+                        '</div>';
+                }
+                strip.innerHTML = html;
+
+                if (prefersReduced) {
+                    strip.style.animation = 'none';
+                }
+            }
+
+            /* Timecode counter — increments every second */
+            var display = document.getElementById('roto-timecode');
+            if (!display || prefersReduced) return;
+
+            var elapsed = 0;
+            function pad(n) { return String(n).padStart(2, '0'); }
+            function tick() {
+                elapsed++;
+                var h = Math.floor(elapsed / 3600);
+                var m = Math.floor((elapsed % 3600) / 60);
+                var s = elapsed % 60;
+                display.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
+            }
+            setInterval(tick, 1000);
+        }());
+
+        /* ── Sticky header scroll class ─────────────────────── */
+        (function () {
+            var header = document.getElementById('site-header');
+            if (!header) return;
+            var sentinel = document.createElement('div');
+            sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;pointer-events:none;';
+            document.body.prepend(sentinel);
+            new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) { header.classList.toggle('scrolled', !e.isIntersecting); });
+            }, { threshold: 0, rootMargin: '-60px 0px 0px 0px' }).observe(sentinel);
+        }());
+    </script>
 </body>
 </html>

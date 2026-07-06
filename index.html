@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multimedia & Authoring</title>
-    <link rel="stylesheet" href="styles.css?v=20260622a">
+    <title>Multimedia &amp; Authoring</title>
+    <meta name="description" content="Multimedia &amp; Authoring — a portfolio showcasing 3D solar system rendering and rotoscope animation, blending creative technology and motion-based storytelling.">
+    <link rel="stylesheet" href="styles.css?v=20260706">
 </head>
 <body>
     <div class="bg-scene" aria-hidden="true">
@@ -16,9 +17,12 @@
     </div>
 
     <div class="page-shell">
-        <header class="site-header">
+        <header class="site-header" id="site-header">
             <div class="brand-block reveal">
-                <p class="eyebrow">BSIT-S-2A</p>
+                <div class="brand-top">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <p class="eyebrow">BSIT-S-2A &nbsp;/&nbsp; STATUS: ONLINE</p>
+                </div>
                 <h1>Multimedia &amp; Authoring</h1>
             </div>
             <nav class="main-nav" aria-label="Main navigation">
@@ -34,23 +38,39 @@
 
         <main>
             <section id="home" class="panel hero reveal">
-                <h2>Welcome to Multimedia &amp; Authoring</h2>
-                <p>
-                    Blending the craft of rotoscoping with the depth of 3D rendering,
-                    this space highlights how creative ideas and technology come together
-                    to build immersive motion-based stories.
-                </p>
+                <div class="hero--asymmetric">
+                    <div class="hero-text">
+                        <span class="mono-label">// MISSION OVERVIEW</span>
+                        <h2>Welcome to Multimedia &amp; Authoring</h2>
+                        <p>
+                            Blending the craft of rotoscoping with the depth of 3D rendering,
+                            this space highlights how creative ideas and technology come together
+                            to build immersive motion-based stories.
+                        </p>
+                    </div>
+
+                    <div class="hero-orbit" aria-hidden="true">
+                        <div class="orbit-ring orbit-ring--4"><div class="orbit-planet"></div></div>
+                        <div class="orbit-ring orbit-ring--3"><div class="orbit-planet"></div></div>
+                        <div class="orbit-ring orbit-ring--2"><div class="orbit-planet"></div></div>
+                        <div class="orbit-ring orbit-ring--1"><div class="orbit-planet"></div></div>
+                        <div class="orbit-sun"></div>
+                    </div>
+                </div>
             </section>
 
             <section id="portfolio" class="panel reveal">
+                <span class="mono-label">// PORTFOLIO INDEX</span>
                 <h2>Portfolio</h2>
                 <div class="topic-grid">
-                    <article class="topic reveal">
+                    <article class="topic reveal" data-accent="solar">
+                        <span class="mono-label">PROJECT-01</span>
                         <h3>3D Solar System</h3>
                         <p>A 3D model and animation project showcasing the planets and their motion.</p>
                         <button class="topic-button" type="button" data-url="solar-system.html">View Project</button>
                     </article>
-                    <article class="topic reveal">
+                    <article class="topic reveal" data-accent="rotoscope">
+                        <span class="mono-label">PROJECT-02</span>
                         <h3>1 Minute Rotoscope Video</h3>
                         <p>A one-minute rotoscope animation focused on frame-by-frame visual storytelling.</p>
                         <button class="topic-button" type="button" data-url="rotoscope.html">Watch Video</button>
@@ -59,6 +79,7 @@
             </section>
 
             <section id="about" class="panel reveal">
+                <span class="mono-label">// ABOUT</span>
                 <h2>About</h2>
                 <p>
                     Multimedia &amp; Authoring is focused on creative digital production, interactive storytelling,
@@ -71,6 +92,26 @@
             <p>&copy; 2026 Multimedia &amp; Authoring Website</p>
         </footer>
     </div>
-    <script src="script.js?v=20260622a"></script>
+
+    <script src="script.js?v=20260706"></script>
+    <script>
+        // Sticky header scroll class
+        (function () {
+            var header = document.getElementById('site-header');
+            if (!header) return;
+            var observer = new IntersectionObserver(
+                function (entries) {
+                    entries.forEach(function (entry) {
+                        header.classList.toggle('scrolled', !entry.isIntersecting);
+                    });
+                },
+                { threshold: 0, rootMargin: '-60px 0px 0px 0px' }
+            );
+            var sentinel = document.createElement('div');
+            sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;pointer-events:none;';
+            document.body.prepend(sentinel);
+            observer.observe(sentinel);
+        }());
+    </script>
 </body>
 </html>

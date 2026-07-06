@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blender 3D Solar System</title>
-    <link rel="stylesheet" href="styles.css?v=20260622a">
+    <meta name="description" content="A Blender-based 3D solar system project featuring orbital mechanics, planetary textures, and animated data displays — with a planet age calculator.">
+    <link rel="stylesheet" href="styles.css?v=20260706">
 </head>
-<body>
+<body class="page--solar">
     <div class="bg-scene" aria-hidden="true">
         <div class="bg-gradient"></div>
         <div class="bg-orb orb-a"></div>
@@ -16,9 +17,12 @@
     </div>
 
     <div class="page-shell">
-        <header class="site-header">
+        <header class="site-header" id="site-header">
             <div class="brand-block reveal visible">
-                <p class="eyebrow">BSIT-S-2A</p>
+                <div class="brand-top">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <p class="eyebrow">BSIT-S-2A &nbsp;/&nbsp; SECTOR: SOLAR</p>
+                </div>
                 <h1>Multimedia &amp; Authoring</h1>
             </div>
             <nav class="main-nav" aria-label="Main navigation">
@@ -34,10 +38,49 @@
 
         <main>
             <section class="panel hero reveal visible">
+                <span class="mono-label">// PROJECT-01 &nbsp;&mdash;&nbsp; BLENDER 3D</span>
                 <h2>Blender 3D Solar System Rendering</h2>
                 <p>
                     A Blender-based solar system project focused on motion, realism, and clear planet presentation.
                 </p>
+
+                <!-- Animated orbit diagram focal visual -->
+                <div class="orbit-diagram-wrap" aria-hidden="true">
+                    <div class="orbit-diagram">
+                        <div class="od-ring od-ring--5"><div class="od-planet"></div></div>
+                        <div class="od-ring od-ring--4"><div class="od-planet"></div></div>
+                        <div class="od-ring od-ring--3"><div class="od-planet"></div></div>
+                        <div class="od-ring od-ring--2"><div class="od-planet"></div></div>
+                        <div class="od-ring od-ring--1"><div class="od-planet"></div></div>
+                        <div class="od-sun"></div>
+                    </div>
+                    <div class="orbit-telemetry">
+                        <div class="telemetry-row">
+                            <span class="telemetry-label">BODY &nbsp;/&nbsp; ORB-R &nbsp;/&nbsp; PERIOD</span>
+                        </div>
+                        <div class="telemetry-row">
+                            <span class="telemetry-label">Mercury</span>
+                            <span class="telemetry-value">0.39 AU &nbsp; 88d</span>
+                        </div>
+                        <div class="telemetry-row">
+                            <span class="telemetry-label">Venus</span>
+                            <span class="telemetry-value">0.72 AU &nbsp; 225d</span>
+                        </div>
+                        <div class="telemetry-row">
+                            <span class="telemetry-label">Earth</span>
+                            <span class="telemetry-value">1.00 AU &nbsp; 365d</span>
+                        </div>
+                        <div class="telemetry-row">
+                            <span class="telemetry-label">Mars</span>
+                            <span class="telemetry-value">1.52 AU &nbsp; 687d</span>
+                        </div>
+                        <div class="telemetry-row">
+                            <span class="telemetry-label">Jupiter</span>
+                            <span class="telemetry-value">5.20 AU &nbsp; 11.9yr</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="video-wrap video-wrap--hero" role="region" aria-label="Complete 3D solar system Blender project video">
                     <video class="project-video" controls preload="metadata">
                         <source src="Celestial Bodies/Caisip - Solar System.mp4" type="video/mp4">
@@ -74,6 +117,7 @@
             </section>
 
             <section class="panel reveal visible age-calculator" id="age-calculator">
+                <span class="mono-label">// CALCULATOR &nbsp;&mdash;&nbsp; PLANETARY AGE</span>
                 <h2>Planet Age Calculator</h2>
                 <p>Enter an age in Earth years to see the equivalent age on each planet.</p>
 
@@ -90,6 +134,7 @@
             </section>
 
             <section class="panel reveal visible">
+                <span class="mono-label">// CELESTIAL BODIES &nbsp;&mdash;&nbsp; 3D MODELS</span>
                 <h2>Celestial Bodies</h2>
                 <div class="body-grid planet-grid">
                     <article class="body-card">
@@ -305,6 +350,19 @@
         </div>
     </div>
 
-    <script src="script.js?v=20260622a"></script>
+    <script src="script.js?v=20260706"></script>
+    <script>
+        // Sticky header scroll class
+        (function () {
+            var header = document.getElementById('site-header');
+            if (!header) return;
+            var sentinel = document.createElement('div');
+            sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;pointer-events:none;';
+            document.body.prepend(sentinel);
+            new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) { header.classList.toggle('scrolled', !e.isIntersecting); });
+            }, { threshold: 0, rootMargin: '-60px 0px 0px 0px' }).observe(sentinel);
+        }());
+    </script>
 </body>
 </html>
